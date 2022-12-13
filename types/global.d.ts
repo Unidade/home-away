@@ -1,6 +1,6 @@
 declare global {
   var prisma: PrismaClient
-  var supabase: SupabaseClient<any, 'public', any>
+  var supabase: SupabaseClient
 }
 
 export {}

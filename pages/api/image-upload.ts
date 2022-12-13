@@ -1,14 +1,9 @@
-import { createClient } from '@supabase/supabase-js'
 import { decode } from 'base64-arraybuffer'
 import { nanoid } from 'nanoid'
 import { NextApiRequest, NextApiResponse } from 'next'
 import checkEnv from '../../utils/getEnv'
-
-const SUPABASE_URL = checkEnv(process.env.SUPABASE_URL)
-const SUPABASE_KEY = checkEnv(process.env.SUPABASE_KEY)
-
+import { supabase } from '../../lib/supabase'
 // create supabase client
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 // Upload image to Supabase
 export default async function handle(
