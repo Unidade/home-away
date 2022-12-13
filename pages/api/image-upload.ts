@@ -9,7 +9,7 @@ const SUPABASE_KEY = checkEnv(process.env.SUPABASE_KEY)
 
 if (!SUPABASE_KEY || !SUPABASE_URL) {
   throw new Error(
-    'Must set SUPARBASE_URL and SUPARBASE_URL envrioment variables'
+    'Must set SUPARBASE_URL and SUPARBASE_URL environment variables'
   )
 }
 
@@ -58,7 +58,7 @@ export default async function handle(
       const url = `${checkEnv(process.env.SUPABASE_URL).replace(
         '.co',
         '.in'
-      )}/storage/v1/object/public/${(data as unknown as { Key: string }).Key}`
+      )}/storage/v1/object/public/${data.path}`
 
       return res.status(200).json({ url })
     } catch (error) {
