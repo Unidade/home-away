@@ -2,9 +2,8 @@ import Layout from '../components/Layout'
 import Grid from '../components/Grid'
 import { NextPageContext } from 'next'
 import { getSession } from 'next-auth/react'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../lib/prisma'
 
-const prisma = new PrismaClient()
 const Homes = ({ homes = [] }) => {
   return (
     <Layout>

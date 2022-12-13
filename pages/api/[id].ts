@@ -1,6 +1,7 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../../lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
+import { IHome } from '../../types/home'
 
 // 401 -> Authentication errors
 // 403 -> Authorization errors
@@ -10,8 +11,6 @@ const METHOD_NOT_ALLOWED = 405
 const UNAUTHENTICATED = 401
 const UNAUTHORIZED = 403
 const SERVER_ERROR = 500
-
-const prisma = new PrismaClient()
 
 export default async function handler(
   req: NextApiRequest,
@@ -29,7 +28,7 @@ export default async function handler(
       select: { listedHomes: true },
     })
     const { id } = req.query
-    if (!user?.listedHomes.find((home) => home.id === id)) {
+    if (!user?.listedHomes.find((home: IHome) => home.id === id)) {
       return res
         .status(UNAUTHORIZED)
         .json({ message: 'You are not authorized to access this resource' })
