@@ -8,7 +8,6 @@ import { Formik, Form } from 'formik'
 import { Transition, Dialog } from '@headlessui/react'
 import { SparklesIcon, MailOpenIcon, XIcon } from '@heroicons/react/outline'
 import { signIn } from 'next-auth/react'
-
 import Input from './Input'
 
 const SignInSchema = Yup.object().shape({
@@ -89,7 +88,7 @@ const AuthModal = ({
         callbackUrl: window.location.href,
       })
       if (signInResponse && 'error' in signInResponse) {
-        // The signIn response is defined and has an 'error' property
+        // The signInResponse object has an 'error' property
         throw new Error(signInResponse.error)
       }
       setConfirm(true)

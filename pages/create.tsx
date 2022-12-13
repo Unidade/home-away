@@ -1,9 +1,12 @@
-import Layout from 'components/Layout'
+import Layout from '../components/Layout'
 import ListingForm from '../components/ListingForm'
 import axios from 'axios'
+import { IHome } from '../types/home'
 
 export default function Create() {
-  const addHome = (data) => axios.post('/api/homes', data)
+  const addHome = (data: IHome) => {
+    axios.post('/api/homes', data)
+  }
 
   return (
     <Layout>

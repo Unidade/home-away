@@ -1,28 +1,36 @@
-import NextAuth from 'next-auth'
-import EmailProvider from 'next-auth/providers/email'
+import NextAuth, { User } from 'next-auth'
+import EmailProvider, {
+  SendVerificationRequestParams,
+} from 'next-auth/providers/email'
 import Handlebars from 'handlebars'
 import nodemailer from 'nodemailer'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
 import GoogleProvider from 'next-auth/providers/google'
 import path from 'path'
+import { readFileSync } from 'fs'
+import checkEnv from '../../../utils/getEnv'
+import SMTPTransport from 'nodemailer/lib/smtp-transport'
 
 // Instantiate Prisma Client
 const prisma = new PrismaClient()
 
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_SERVER_HOST,
-  port: process.env.EMAIL_SERVER_PORT,
+  host: checkEnv(process.env.EMAIL_SERVER_HOST),
+  port: Number(checkEnv(process.env.EMAIL_SERVER_PORT)), // need to be a number not a string
   auth: {
-    user: process.env.EMAIL_SERVER_USER,
-    pass: process.env.EMAIL_SERVER_PASSWORD,
+    user: checkEnv(process.env.EMAIL_SERVER_USER),
+    pass: checkEnv(process.env.EMAIL_SERVER_PASSWORD),
   },
   secure: true,
-})
+} as SMTPTransport.Options) // Explicity exposes the required interface overriding the default Transport<T> | TransportOptions checking
 
 const emailsDir = path.resolve(process.cwd(), 'emails')
 
-const sendVerificationRequest = ({ identifier, url }) => {
+const sendVerificationRequest = ({
+  identifier,
+  url,
+}: Pick<SendVerificationRequestParams, 'identifier' | 'url'>) => {
   const emailFile = readFileSync(path.join(emailsDir, 'confirm-email.html'), {
     encoding: 'utf8',
   })
@@ -39,7 +47,7 @@ const sendVerificationRequest = ({ identifier, url }) => {
   })
 }
 
-const sendWelcomeEmail = async ({ user }) => {
+const sendWelcomeEmail = async ({ user }: { user: User }) => {
   const { email } = user
 
   try {
@@ -49,7 +57,7 @@ const sendWelcomeEmail = async ({ user }) => {
     const emailTemplate = Handlebars.compile(emailFile)
     await transporter.sendMail({
       from: `"✨ SupaVacation" ${process.env.EMAIL_FROM}`,
-      to: email,
+      to: email as string,
       subject: 'Welcome to SupaVacation',
       html: emailTemplate({
         base_url: process.env.NEXTAUTH_URL,
@@ -62,6 +70,7 @@ const sendWelcomeEmail = async ({ user }) => {
 }
 
 export default NextAuth({
+  // Specify URLs to be used if you want to create custom sign in, sign out and error pages. Pages specified will override the corresponding built-in page.
   pages: {
     signIn: '/',
     signOut: '/',
@@ -70,8 +79,8 @@ export default NextAuth({
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
+      clientId: checkEnv(process.env.GOOGLE_ID),
+      clientSecret: checkEnv(process.env.GOOGLE_SECRET),
     }),
     EmailProvider({
       sendVerificationRequest,

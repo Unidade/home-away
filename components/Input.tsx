@@ -72,6 +72,8 @@ interface IInputProps {
   props?: any
   disabled?: boolean
   spellCheck?: boolean
+  min?: string
+  rows?: number
 }
 
 export default Input

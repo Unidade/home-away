@@ -1,16 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { HeartIcon } from '@heroicons/react/solid'
+import { IHome } from '../types/home'
 
-interface ICardsProps {
-  id: string
-  image: string
-  title: string
-  description: string
-  guests: number
-  beds: number
-  baths: number
-  price: number
+interface ICardsProps extends IHome {
   favorite: boolean
   onClickFavorite: (id: string) => void
 }
@@ -31,9 +24,13 @@ const Card = ({
       <div className='bg-gray-200 rounded-lg shadow overflow-hidden aspect-w-16 aspect-h-9'>
         {image ? (
           <Image
+            priority
             src={image}
             alt={title}
             fill
+            sizes='(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw'
             className='hover:opacity-80 transition object-cover'
           />
         ) : null}
