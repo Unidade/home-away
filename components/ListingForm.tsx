@@ -7,6 +7,7 @@ import { Formik, Form } from 'formik'
 import Input from './Input'
 import ImageUpload from './ImageUpload'
 import axios from 'axios'
+import { IHome } from '../types/home'
 
 const ListingSchema = Yup.object().shape({
   title: Yup.string().trim().required(),
@@ -18,17 +19,17 @@ const ListingSchema = Yup.object().shape({
 })
 
 const ListingForm = ({
-  initialValues = null,
+  initialValues,
   redirectPath = '',
   buttonText = 'Submit',
   onSubmit = () => null,
-}) => {
+}: IListingForm) => {
   const router = useRouter()
 
   const [disabled, setDisabled] = useState(false)
   const [imageUrl, setImageUrl] = useState(initialValues?.image ?? '')
 
-  const upload = async (image) => {
+  const upload = async (image: string) => {
     if (!image) return
 
     let toastId
@@ -46,7 +47,8 @@ const ListingForm = ({
     }
   }
 
-  const handleOnSubmit = async (values = null) => {
+  const handleOnSubmit = async (values: Omit<IHome, 'image' | 'id'>) => {
+    console.log(values)
     let toastId
     try {
       setDisabled(true)
@@ -164,19 +166,11 @@ const ListingForm = ({
   )
 }
 
-ListingForm.propTypes = {
-  initialValues: PropTypes.shape({
-    image: PropTypes.string,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    price: PropTypes.number,
-    guests: PropTypes.number,
-    beds: PropTypes.number,
-    baths: PropTypes.number,
-  }),
-  redirectPath: PropTypes.string,
-  buttonText: PropTypes.string,
-  onSubmit: PropTypes.func,
+interface IListingForm {
+  initialValues?: IHome
+  redirectPath: string
+  buttonText: string
+  onSubmit: (data: any) => void
 }
 
 export default ListingForm

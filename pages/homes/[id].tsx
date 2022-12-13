@@ -3,9 +3,12 @@ import Image from 'next/image'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 
+import type { NextPageContext } from 'next'
+import { IHome } from '../../types/home'
+
 const prisma = new PrismaClient()
 
-export default function ListedHome(home = null) {
+export default function ListedHome(home: IHome | null) {
   const router = useRouter()
 
   if (router.isFallback) {
@@ -64,7 +67,13 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getStaticProps({ params }) {
+interface NextPageContextWithParams extends NextPageContext {
+  params: {
+    id: string
+  }
+}
+
+export async function getStaticProps({ params }: NextPageContextWithParams) {
   const home = await prisma.home.findUnique({
     where: { id: params.id },
   })

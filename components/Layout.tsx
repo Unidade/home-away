@@ -61,7 +61,7 @@ const Layout = ({ children = null }: ILayoutProps) => {
         <title>SupaVacation | The Modern Dev</title>
         <meta
           name='title'
-          content='Learn how to Build a Fullstack App with Next.js, PlanetScale & Prisma | The Modern Dev'
+          content='Fullstack App with Next.js, Supabase & Prisma'
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
@@ -150,7 +150,7 @@ const Layout = ({ children = null }: ILayoutProps) => {
                                   ) : (
                                     <button
                                       className='w-full flex items-center space-x-2 py-2 px-4 rounded-md hover:bg-gray-100'
-                                      onClick={() => onClick}
+                                      onClick={() => signOut()}
                                     >
                                       <Icon className='w-5 h-5 shrink-0 text-gray-500' />
                                       <span>{label}</span>
