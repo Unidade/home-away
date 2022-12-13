@@ -87,8 +87,9 @@ const AuthModal = ({
         redirect: false,
         callbackUrl: window.location.href,
       })
-      if (signInResponse && 'error' in signInResponse) {
+      if (signInResponse && signInResponse.error) {
         // The signInResponse object has an 'error' property
+
         throw new Error(signInResponse.error)
       }
       setConfirm(true)
