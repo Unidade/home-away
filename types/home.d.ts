@@ -7,4 +7,5 @@ export interface IHome {
   beds: number
   baths: number
   price: number
+  ownerId: string
 }

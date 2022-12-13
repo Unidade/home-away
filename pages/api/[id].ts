@@ -2,7 +2,7 @@ import { prisma } from '../../lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
 import { IHome } from '../../types/home'
-
+import { supabase } from '../../lib/supabase'
 // 401 -> Authentication errors
 // 403 -> Authorization errors
 // Reference:   https://www.rfc-editor.org/rfc/rfc9110#status.401
@@ -43,9 +43,18 @@ export default async function handler(
     }
     // Delete home
     else if (req.method === 'DELETE') {
-      const home = await prisma.home.delete({
+      const home: IHome | null = await prisma.home.delete({
         where: { id } as { id: string },
       })
+      if (home?.image) {
+        const path = home.image.split('/').pop()
+        console.log(
+          'delete image from supabase:',
+          await supabase.storage
+            .from(process.env.SUPABASE_BUCKET)
+            .remove([path as string])
+        )
+      }
       res.status(200).json({ home })
     }
     // Unsupported method

@@ -9,6 +9,7 @@ import { prisma } from '../../../lib/prisma'
 
 const Edit = (home: IHome | undefined) => {
   const updateHome = (data: Partial<IHome>) => {
+    console.log('data:', data, 'home:', home)
     axios.patch(`/api/homes/${home?.id}`, data)
   }
 
