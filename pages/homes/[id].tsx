@@ -3,10 +3,9 @@ import Image from 'next/image'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 
-import type { NextPageContext } from 'next'
 import { IHome } from '../../types/home'
-
-const prisma = new PrismaClient()
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
+import { prisma } from '../../lib/prisma'
 
 export default function ListedHome(home: IHome | null) {
   const router = useRouter()
@@ -61,20 +60,14 @@ export async function getStaticPaths() {
   })
 
   return {
-    paths: homes.map((home) => ({
+    paths: homes.map((home: IHome) => ({
       params: { id: home.id },
     })),
     fallback: true,
   }
 }
 
-interface NextPageContextWithParams extends NextPageContext {
-  params: {
-    id: string
-  }
-}
-
-export async function getStaticProps({ params }: NextPageContextWithParams) {
+export async function getStaticProps({ params }: Params) {
   const home = await prisma.home.findUnique({
     where: { id: params.id },
   })

@@ -7,12 +7,6 @@ import checkEnv from '../../utils/getEnv'
 const SUPABASE_URL = checkEnv(process.env.SUPABASE_URL)
 const SUPABASE_KEY = checkEnv(process.env.SUPABASE_KEY)
 
-if (!SUPABASE_KEY || !SUPABASE_URL) {
-  throw new Error(
-    'Must set SUPARBASE_URL and SUPARBASE_URL environment variables'
-  )
-}
-
 // create supabase client
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
