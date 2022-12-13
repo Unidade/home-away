@@ -41,6 +41,7 @@ export default function ListedHome(home: IHome | null) {
         <div className='mt-6 relative aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg shadow-md overflow-hidden'>
           {home?.image ? (
             <Image
+              priority
               src={home.image}
               alt={home.title}
               fill

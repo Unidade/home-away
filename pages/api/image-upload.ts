@@ -58,7 +58,7 @@ export default async function handle(
       const url = `${checkEnv(process.env.SUPABASE_URL).replace(
         '.co',
         '.in'
-      )}/storage/v1/object/public/${data.path}`
+      )}/storage/v1/object/public/${bucket}/${data.path}`
 
       return res.status(200).json({ url })
     } catch (error) {
