@@ -1,9 +1,11 @@
 import { createClient } from '@supabase/supabase-js'
 import { decode } from 'base64-arraybuffer'
 import { nanoid } from 'nanoid'
+import { NextApiRequest, NextApiResponse } from 'next'
+import checkEnv from '../../utils/getEnv'
 
-const SUPABASE_URL = process.env.SUPABASE_URL
-const SUPABASE_KEY = process.env.SUPABASE_KEY
+const SUPABASE_URL = checkEnv(process.env.SUPABASE_URL)
+const SUPABASE_KEY = checkEnv(process.env.SUPABASE_KEY)
 
 if (!SUPABASE_KEY || !SUPABASE_URL) {
   throw new Error(
@@ -15,7 +17,10 @@ if (!SUPABASE_KEY || !SUPABASE_URL) {
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 // Upload image to Supabase
-export default async function handle(req, res) {
+export default async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method === 'POST') {
     let { image } = await req.body
     if (!image) {
@@ -35,7 +40,7 @@ export default async function handle(req, res) {
       const fileName = nanoid()
       const ext = contentType.split('/')[1]
       const path = `${fileName}.${ext}`
-      const bucket = process.env.SUPABASE_BUCKET
+      const bucket = checkEnv(process.env.SUPABASE_BUCKET)
 
       const { data, error: uploadError } = await supabase.storage
         .from(bucket)
@@ -50,10 +55,10 @@ export default async function handle(req, res) {
       }
 
       // Construct public URL
-      const url = `${process.env.SUPABASE_URL.replace(
+      const url = `${checkEnv(process.env.SUPABASE_URL).replace(
         '.co',
         '.in'
-      )}/storage/v1/object/public/${data.Key}`
+      )}/storage/v1/object/public/${(data as unknown as { Key: string }).Key}`
 
       return res.status(200).json({ url })
     } catch (error) {
