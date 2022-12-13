@@ -120,7 +120,7 @@ const AuthModal = ({
   // Reset modal
   useEffect(() => {
     if (!show) {
-      // Wait for 200ms for aniamtion to finish
+      // Wait for 200ms for animation to finish
       setTimeout(() => {
         setDisabled(false)
         setConfirm(false)

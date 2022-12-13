@@ -1,7 +1,10 @@
 import Layout from '../components/Layout'
 import ListingForm from '../components/ListingForm'
 import axios from 'axios'
+import { getSession } from 'next-auth/react'
+
 import { IHome } from '../types/home'
+import { NextPageContext } from 'next'
 
 export default function Create() {
   const addHome = (data: IHome) => {
@@ -25,4 +28,18 @@ export default function Create() {
       </div>
     </Layout>
   )
+}
+
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context)
+
+  if (!session) {
+    return {
+      redirect: { destination: '/', permanent: false },
+    }
+  }
+
+  return {
+    props: {},
+  }
 }

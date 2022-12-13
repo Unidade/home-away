@@ -66,23 +66,29 @@ const Layout = ({ children = null }: ILayoutProps) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div className='min-h-screen flex flex-col'>
-        <header className='h-16 w-full shadow-md'>
+      <div className='min-h-screen flex flex-col '>
+        <header
+          className='h-16 w-full shadow-md sticky top-0 
+         bg-white/90 backdrop-blur-md z-10 '
+        >
           <div className='h-full container mx-auto'>
             <div className='h-full px-4 flex justify-between items-center space-x-4'>
               <Link className='flex items-center space-x-1' href='/'>
-                <SparklesIcon className='shrink-0 w-8 h-8 text-rose-500' />
+                <SparklesIcon className='shrink-0 w-8 h-8 text-blue-800' />
                 <span className='text-xl font-semibold tracking-wide'>
-                  Supa<span className='text-rose-600'>Vacation</span>
+                  Supa<span className='text-blue-700'>Vacation</span>
                 </span>
               </Link>
               <div className='flex items-center space-x-4'>
-                <Link
+                <button
+                  type='button'
+                  onClick={() =>
+                    session?.user ? router.push('/create') : openModal()
+                  }
                   className='hidden sm:block hover:bg-gray-200 transition px-3 py-1 rounded-md'
-                  href='/create'
                 >
                   List your home
-                </Link>
+                </button>
                 {isLoadingUser ? (
                   <div className='h-8 w-[75px] bg-gray-200 animate-pulse rounded-md' />
                 ) : user ? (
@@ -168,7 +174,7 @@ const Layout = ({ children = null }: ILayoutProps) => {
                   <button
                     type='button'
                     onClick={openModal}
-                    className='ml-4 px-4 py-1 rounded-md bg-rose-600 hover:bg-rose-500 focus:outline-none focus:ring-4 focus:ring-rose-500 focus:ring-opacity-50 text-white transition'
+                    className='ml-4 px-4 py-1 rounded-md bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-rose-500 focus:ring-opacity-50 text-white transition'
                   >
                     Log in
                   </button>
