@@ -12,6 +12,7 @@ export default async function handle(
 ) {
   if (req.method === 'POST') {
     let { image } = await req.body
+    console.log(image)
     if (!image) {
       return res.status(500).json({ message: 'No image provided' })
     }

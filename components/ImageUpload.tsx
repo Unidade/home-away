@@ -10,7 +10,7 @@ interface IImageUploadProps {
   objectFit?: string
   sizeLimit?: number
   accept?: string
-  onChangePicture?: (image: string) => void
+  onChangePicture?: (image: string) => Promise<void>
 }
 
 const ImageUpload = ({
@@ -19,7 +19,7 @@ const ImageUpload = ({
   objectFit = 'object-cover',
   accept = '.png, .jpg, .jpeg, .gif',
   sizeLimit = 10 * 1024 * 1024, // 10MB
-  onChangePicture = () => null,
+  onChangePicture,
 }: IImageUploadProps) => {
   const pictureRef = useRef<null | HTMLInputElement>(null)
 

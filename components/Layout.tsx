@@ -25,7 +25,7 @@ const menuItems = [
   {
     label: 'List a new home',
     icon: PlusIcon,
-    href: '/list',
+    href: '/create',
   },
   {
     label: 'My homes',

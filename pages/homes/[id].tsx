@@ -6,6 +6,7 @@ import { prisma } from '../../lib/prisma'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { PencilIcon } from '@heroicons/react/solid'
 
 export default function ListedHome(home: IHome) {
   const router = useRouter()
@@ -72,6 +73,7 @@ export default function ListedHome(home: IHome) {
                 onClick={() => router.push(`/homes/${home?.id}/edit`)}
                 className='px-4 py-1 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition rounded-md disabled:text-gray-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed'
               >
+                <PencilIcon />
                 Edit
               </button>
 
@@ -98,10 +100,10 @@ export default function ListedHome(home: IHome) {
             />
           ) : null}
         </div>
-        <h2 className='mt-4 text-xl font-semibold border-b-2 uppercase'>
+        <h2 className='mt-4 text-xl font-semibold uppercase tracking-tight'>
           Description
         </h2>
-        <p className='mt-8 text-lg'>{home?.description ?? ''}</p>
+        <p className='mt-2 text-lg'>{home?.description ?? ''}</p>
       </div>
     </Layout>
   )
