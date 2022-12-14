@@ -1,34 +1,28 @@
 import Image from 'next/image'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
-
 import { IHome } from '../../types/home'
 import { prisma } from '../../lib/prisma'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
-let sideEffectCount = 0
-
-/**
- * Individual page for each home
- * @param home
- * @returns
- */
-export default function ListedHome(home: IHome | null) {
+export default function ListedHome(home: IHome) {
   const router = useRouter()
   const { data: session } = useSession()
   const [isOwner, setIsOwner] = useState(false)
   const [deleting, setDeleting] = useState(false)
+
+  console.log(session)
+  console.log(home)
 
   const deleteHome = async () => {
     let toastId
     try {
       toastId = toast.loading('Deleting home...')
       setDeleting(true)
-      console.log(home?.id)
-      await axios.delete(`/api/homes/${home?.id}`)
+      await fetch(`/api/homes/${home?.id}`, { method: 'DELETE' })
+
       toast.success('Home deleted', { id: toastId })
       router.push('/homes')
     } catch (error) {
@@ -39,21 +33,9 @@ export default function ListedHome(home: IHome | null) {
   }
 
   useEffect(() => {
-    ;(async () => {
-      if (session?.user && home) {
-        console.log(sideEffectCount)
-        sideEffectCount++
-        try {
-          const { owner } = await await (
-            await axios.get(`/api/homes/${home.id}/ownerId`)
-          ).data
-
-          setIsOwner(owner.id === home.ownerId)
-        } catch (e) {
-          setIsOwner(false)
-        }
-      }
-    })() // declare and invoke immediately async function
+    if (session?.user && home) {
+      setIsOwner(session.user.id === home.ownerId)
+    }
   }, [session, home])
 
   if (router.isFallback) {
@@ -116,6 +98,9 @@ export default function ListedHome(home: IHome | null) {
             />
           ) : null}
         </div>
+        <h2 className='mt-4 text-xl font-semibold border-b-2 uppercase'>
+          Description
+        </h2>
         <p className='mt-8 text-lg'>{home?.description ?? ''}</p>
       </div>
     </Layout>

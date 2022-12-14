@@ -89,4 +89,11 @@ export default NextAuth({
   ],
   adapter: PrismaAdapter(prisma),
   events: { createUser: sendWelcomeEmail }, // When user is created, send welcome email
+  callbacks: {
+    async session({ session, user }) {
+      // Add the user's ID to the session
+      session.user.id = user.id
+      return session
+    },
+  },
 })
