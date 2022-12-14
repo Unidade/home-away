@@ -22,7 +22,7 @@ const Card = ({
 }: ICardsProps) => (
   <Link className='block w-full' href={`/homes/${id}`}>
     <div className='relative'>
-      <div className='bg-gray-200 rounded-lg shadow overflow-hidden aspect-w-16 aspect-h-9'>
+      <div className='aspect-w-16 aspect-h-9 overflow-hidden rounded-lg bg-gray-200 shadow'>
         {image ? (
           <Image
             priority
@@ -32,7 +32,7 @@ const Card = ({
             sizes='(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,
               33vw'
-            className='hover:opacity-80 transition object-cover'
+            className='object-cover transition hover:opacity-80'
           />
         ) : null}
       </div>
@@ -47,13 +47,13 @@ const Card = ({
         className='absolute top-2 right-2'
       >
         <HeartIcon
-          className={`w-7 h-7 drop-shadow-lg transition ${
+          className={`h-7 w-7 drop-shadow-lg transition ${
             favorite ? 'text-red-500' : 'text-white'
           }`}
         />
       </button>
     </div>
-    <div className='mt-2 w-full text-gray-700 font-semibold leading-tight'>
+    <div className='mt-2 w-full font-semibold leading-tight text-gray-700'>
       {title ?? ''}
     </div>
     <ol className='mt-1 inline-flex items-center space-x-1 text-gray-500'>

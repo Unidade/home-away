@@ -48,7 +48,9 @@
     "eslint-config-next": "^13.0.6",
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.20",
+    "prettier": "^2.8.1",
     "prettier-plugin-prisma": "^4.4.0",
+    "prettier-plugin-tailwindcss": "^0.2.1",
     "prisma": "^4.7.1",
     "tailwindcss": "^3.2.4"
   }

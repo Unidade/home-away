@@ -77,7 +77,7 @@ const ImageUpload = ({
         disabled={updatingPicture}
         onClick={handleOnClickPicture}
         className={classNames(
-          'relative aspect-w-16 aspect-h-9 overflow-hidden rounded-md disabled:opacity-50 disabled:cursor-not-allowed transition group focus:outline-none',
+          'group aspect-w-16 aspect-h-9 relative overflow-hidden rounded-md transition focus:outline-none disabled:cursor-not-allowed disabled:opacity-50',
           image?.src
             ? 'hover:opacity-50 disabled:hover:opacity-100'
             : 'border-2 border-dashed hover:border-gray-400 focus:border-gray-400 disabled:hover:border-gray-200'
@@ -95,8 +95,8 @@ const ImageUpload = ({
         <div className='flex items-center justify-center'>
           {!image?.src ? (
             <div className='flex flex-col items-center space-y-2'>
-              <div className='shrink-0 rounded-full p-2 bg-gray-200 group-hover:scale-110 group-focus:scale-110 transition'>
-                <ArrowUpIcon className='w-4 h-4 text-gray-500 transition' />
+              <div className='shrink-0 rounded-full bg-gray-200 p-2 transition group-hover:scale-110 group-focus:scale-110'>
+                <ArrowUpIcon className='h-4 w-4 text-gray-500 transition' />
               </div>
               <span className='text-xs font-semibold text-gray-500 transition'>
                 {updatingPicture ? 'Uploading...' : 'Upload'}
@@ -114,7 +114,7 @@ const ImageUpload = ({
       </button>
 
       {pictureError ? (
-        <span className='text-red-600 text-sm'>{pictureError}</span>
+        <span className='text-sm text-red-600'>{pictureError}</span>
       ) : null}
     </div>
   )

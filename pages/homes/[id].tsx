@@ -44,10 +44,10 @@ export default function ListedHome(home: IHome) {
   }
   return (
     <Layout>
-      <div className='max-w-screen-lg mx-auto'>
-        <div className='flex flex-col sm:flex-row sm:justify-between sm:space-x-4 space-y-4'>
+      <div className='mx-auto max-w-screen-lg'>
+        <div className='flex flex-col space-y-4 sm:flex-row sm:justify-between sm:space-x-4'>
           <div>
-            <h1 className='text-2xl font-semibold truncate'>
+            <h1 className='truncate text-2xl font-semibold'>
               {home?.title ?? ''}
             </h1>
             <ol className='inline-flex items-center space-x-1 text-gray-500'>
@@ -71,7 +71,7 @@ export default function ListedHome(home: IHome) {
                 type='button'
                 disabled={deleting}
                 onClick={() => router.push(`/homes/${home?.id}/edit`)}
-                className='px-4 py-1 border border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white transition rounded-md disabled:text-gray-800 disabled:bg-transparent disabled:opacity-50 disabled:cursor-not-allowed'
+                className='rounded-md border border-gray-800 px-4 py-1 text-gray-800 transition hover:bg-gray-800 hover:text-white disabled:cursor-not-allowed disabled:bg-transparent disabled:text-gray-800 disabled:opacity-50'
               >
                 <PencilIcon />
                 Edit
@@ -81,7 +81,7 @@ export default function ListedHome(home: IHome) {
                 type='button'
                 disabled={deleting}
                 onClick={deleteHome}
-                className='rounded-md border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white focus:outline-none transition disabled:bg-rose-500 disabled:text-white disabled:opacity-50 disabled:cursor-not-allowed px-4 py-1'
+                className='rounded-md border border-blue-500 px-4 py-1 text-blue-500 transition hover:bg-blue-500 hover:text-white focus:outline-none disabled:cursor-not-allowed disabled:bg-rose-500 disabled:text-white disabled:opacity-50'
               >
                 {deleting ? 'Deleting...' : 'Delete'}
               </button>
@@ -89,9 +89,12 @@ export default function ListedHome(home: IHome) {
           ) : null}
         </div>
 
-        <div className='mt-6 relative aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg shadow-md overflow-hidden'>
+        <div className='aspect-w-16 aspect-h-9 relative mt-6 overflow-hidden rounded-lg bg-gray-100 shadow-md'>
           {home?.image ? (
             <Image
+              sizes=' sizes="(min-width: 768px) 50vw,
+              (min-width: 1200px) 33vw,
+              100vw"'
               priority
               src={home.image}
               alt={home.title}
