@@ -38,7 +38,7 @@ const ListingForm = ({
       setDisabled(true)
       toastId = toast.loading('Uploading...')
 
-      const data = await fetchJSON('/api/image-upload', {
+      const { url: imageURL } = await fetchJSON('/api/image-upload', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -46,8 +46,8 @@ const ListingForm = ({
 
         body: JSON.stringify({ image }),
       })
-      console.log(data)
-      setImageUrl(data?.url)
+      console.log(imageURL)
+      setImageUrl(imageURL)
       toast.success('Successfully uploaded', { id: toastId })
     } catch (e) {
       toast.error('Unable to upload', { id: toastId })
