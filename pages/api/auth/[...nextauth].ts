@@ -9,7 +9,7 @@ import { PrismaClient } from '@prisma/client'
 import GoogleProvider from 'next-auth/providers/google'
 import path from 'path'
 import { readFileSync } from 'fs'
-import checkEnv from '../../../utils/getEnv'
+import checkEnv from 'utils/getEnv'
 import SMTPTransport from 'nodemailer/lib/smtp-transport'
 
 // Instantiate Prisma Client
