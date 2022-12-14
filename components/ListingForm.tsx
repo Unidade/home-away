@@ -6,8 +6,9 @@ import { toast } from 'react-hot-toast'
 import { Formik, Form } from 'formik'
 import Input from './Input'
 import ImageUpload from './ImageUpload'
-import axios from 'axios'
+
 import { IHome } from '../types/home'
+import { fetchJSON } from '../lib/fetchJSON'
 
 const ListingSchema = Yup.object().shape({
   title: Yup.string().trim().required(),
@@ -22,7 +23,7 @@ const ListingForm = ({
   initialValues,
   redirectPath = '',
   buttonText = 'Submit',
-  onSubmit = () => null,
+  onSubmit = () => new Promise((resolve) => resolve()),
 }: IListingForm) => {
   const router = useRouter()
 
@@ -36,7 +37,16 @@ const ListingForm = ({
     try {
       setDisabled(true)
       toastId = toast.loading('Uploading...')
-      const { data } = await axios.post('/api/image-upload', { image })
+
+      const data = await fetchJSON('/api/image-upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({ image }),
+      })
+      console.log(data)
       setImageUrl(data?.url)
       toast.success('Successfully uploaded', { id: toastId })
     } catch (e) {
@@ -171,7 +181,7 @@ interface IListingForm {
   initialValues?: IHome
   redirectPath: string
   buttonText: string
-  onSubmit: (data: any) => void
+  onSubmit: (data: any) => Promise<void>
 }
 
 export default ListingForm
