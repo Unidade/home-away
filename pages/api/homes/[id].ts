@@ -1,8 +1,9 @@
-import { prisma } from '../../lib/prisma'
+import { prisma } from '../../../lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getSession } from 'next-auth/react'
-import { IHome } from '../../types/home'
-import { supabase } from '../../lib/supabase'
+import { supabase } from '../../../lib/supabase'
+import checkEnv from '../../../utils/getEnv'
+
 // 401 -> Authentication errors
 // 403 -> Authorization errors
 // Reference:   https://www.rfc-editor.org/rfc/rfc9110#status.401
@@ -28,7 +29,7 @@ export default async function handler(
       select: { listedHomes: true },
     })
     const { id } = req.query
-    if (!user?.listedHomes.find((home: IHome) => home.id === id)) {
+    if (!user?.listedHomes.find((home) => home.id === id)) {
       return res
         .status(UNAUTHORIZED)
         .json({ message: 'You are not authorized to access this resource' })
@@ -43,17 +44,20 @@ export default async function handler(
     }
     // Delete home
     else if (req.method === 'DELETE') {
-      const home: IHome | null = await prisma.home.delete({
+      const home = await prisma.home.delete({
         where: { id } as { id: string },
       })
+      // delete image from supabase storage bucket
       if (home?.image) {
         const path = home.image.split('/').pop()
-        console.log(
-          'delete image from supabase:',
-          await supabase.storage
-            .from(process.env.SUPABASE_BUCKET)
-            .remove([path as string])
-        )
+        console.log(path)
+        const { data, error } = await supabase.storage
+          .from(checkEnv(process.env.SUPABASE_BUCKET))
+          .remove([path as string])
+        if (error) {
+          console.log(error)
+          throw new Error(error.message)
+        }
       }
       res.status(200).json({ home })
     }
@@ -64,8 +68,8 @@ export default async function handler(
     }
   } catch (error) {
     console.error(error)
-    res
-      .status(SERVER_ERROR)
-      .json({ message: 'The server was not able to process your request' })
+    res.status(SERVER_ERROR).json({
+      message: `The server was not able to process your request: ${error}`,
+    })
   }
 }

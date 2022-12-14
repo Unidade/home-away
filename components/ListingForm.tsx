@@ -76,6 +76,7 @@ const ListingForm = ({
     guests: 1,
     beds: 1,
     baths: 1,
+    ownerId: '',
   }
 
   return (

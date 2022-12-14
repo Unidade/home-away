@@ -1,23 +1,12 @@
 import Card from '../components/Card'
 import { ExclamationIcon } from '@heroicons/react/outline'
+import { IHome } from '../types/home'
 
 interface IGridProps {
   homes: IHome[]
 }
 
-interface IHome {
-  id: string
-  image: string
-  title: string
-  description: string
-  guests: number
-  beds: number
-  baths: number
-  price: number
-  favorite: boolean
-}
-
-const Grid = ({ homes = [] }) => {
+const Grid = ({ homes }: IGridProps) => {
   const isEmpty = homes.length === 0
 
   const toggleFavorite = async () => {
