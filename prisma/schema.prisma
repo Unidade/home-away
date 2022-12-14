@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -21,9 +18,8 @@ model Home {
   baths       Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  owner       User     @relation(fields: [ownerId], references: [id])
   ownerId     String
-  favoritedBy User[]   @relation(name: "favoritesHomes")
+  owner       User     @relation(fields: [ownerId], references: [id])
 }
 
 model Account {
@@ -32,17 +28,16 @@ model Account {
   type               String
   provider           String
   providerAccountId  String
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
+  refresh_token      String?
+  access_token       String?
   expires_at         Int?
   token_type         String?
   scope              String?
-  id_token           String? @db.Text
+  id_token           String?
   session_state      String?
   oauth_token_secret String?
   oauth_token        String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -62,14 +57,13 @@ model User {
   emailVerified DateTime?
   image         String?
   accounts      Account[]
-  sessions      Session[]
   listedHomes   Home[]
-  favoriteHomes Home[]    @relation(name: "favoritesHomes")
+  sessions      Session[]
 }
 
 model VerificationToken {
   identifier String
-  token      String   @unique
+  token      String   @id @unique
   expires    DateTime
 
   @@unique([identifier, token])
