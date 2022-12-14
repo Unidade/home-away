@@ -26,7 +26,7 @@ const Input = ({
             {...field}
             {...props}
             className={classNames(
-              'w-full shadow-sm rounded-md py-2 pl-4 truncate border focus:outline-none focus:ring-4 focus:ring-opacity-20 transition disabled:opacity-50 disabled:cursor-not-allowed',
+              'w-full truncate rounded-md border py-2 pl-4 shadow-sm transition focus:outline-none focus:ring-4 focus:ring-opacity-20 disabled:cursor-not-allowed disabled:opacity-50',
               error
                 ? 'border-red-400 text-red-800 focus:border-red-400 focus:ring-red-400'
                 : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400'
@@ -39,15 +39,15 @@ const Input = ({
               {...props}
               type={type}
               className={classNames(
-                'w-full shadow-sm rounded-md py-2 pl-4 truncate border focus:outline-none focus:ring-4 focus:ring-opacity-20 transition disabled:opacity-50 disabled:cursor-not-allowed',
+                'w-full truncate rounded-md border py-2 pl-4 shadow-sm transition focus:outline-none focus:ring-4 focus:ring-opacity-20 disabled:cursor-not-allowed disabled:opacity-50',
                 error
                   ? 'border-red-400 text-red-800 focus:border-red-400 focus:ring-red-400'
                   : 'border-gray-300 focus:border-gray-400 focus:ring-gray-400'
               )}
             />
             {error && type !== 'number' ? (
-              <span className='pr-2 absolute right-0 top-1/2 -translate-y-1/2'>
-                <ExclamationCircleIcon className='w-6 h-6 text-red-500' />
+              <span className='absolute right-0 top-1/2 -translate-y-1/2 pr-2'>
+                <ExclamationCircleIcon className='h-6 w-6 text-red-500' />
               </span>
             ) : null}
           </div>
@@ -55,7 +55,7 @@ const Input = ({
       </div>
 
       {error ? (
-        <p id='email' className='text-red-600 text-sm first-letter:uppercase'>
+        <p id='email' className='text-sm text-red-600 first-letter:uppercase'>
           {error}
         </p>
       ) : null}

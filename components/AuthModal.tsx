@@ -41,16 +41,16 @@ const Confirm = ({ show = false, email = '' }) => (
         leaveFrom='opacity-100 scale-100'
         leaveTo='opacity-0 scale-95'
       >
-        <div className='flex items-center justify-center h-full p-8'>
-          <div className='overflow-hidden transition-all transform'>
+        <div className='flex h-full items-center justify-center p-8'>
+          <div className='transform overflow-hidden transition-all'>
             <h3 className='text-center text-lg font-medium leading-6'>
-              <div className='flex flex-col justify-center items-center space-y-4'>
-                <MailOpenIcon className='w-12 h-12 shrink-0 text-rose-500' />
+              <div className='flex flex-col items-center justify-center space-y-4'>
+                <MailOpenIcon className='h-12 w-12 shrink-0 text-rose-500' />
               </div>
-              <p className='text-2xl font-semibold mt-2'>Confirm your email</p>
+              <p className='mt-2 text-2xl font-semibold'>Confirm your email</p>
             </h3>
 
-            <p className='text-lg text-center mt-4'>
+            <p className='mt-4 text-center text-lg'>
               We emailed a magic link to <strong>{email ?? ''}</strong>.
               <br />
               Check your inbox and click the link in the email to login or sign
@@ -173,20 +173,20 @@ const AuthModal = ({
             leaveFrom='opacity-100 scale-100'
             leaveTo='opacity-0 scale-95'
           >
-            <div className='inline-block w-full my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl sm:rounded-md max-w-md relative'>
+            <div className='relative my-8 inline-block w-full max-w-md transform overflow-hidden bg-white text-left align-middle shadow-xl transition-all sm:rounded-md'>
               {/* Close icon */}
               <button
                 onClick={closeModal}
-                className='absolute top-2 right-2 shrink-0 p-1 rounded-md hover:bg-gray-100 transition focus:outline-none'
+                className='absolute top-2 right-2 shrink-0 rounded-md p-1 transition hover:bg-gray-100 focus:outline-none'
               >
-                <XIcon className='w-5 h-5' />
+                <XIcon className='h-5 w-5' />
               </button>
 
               <div className='py-12'>
                 <div className='px-4 sm:px-12'>
                   <div className='flex justify-center'>
                     <Link className='flex items-center space-x-1' href='/'>
-                      <SparklesIcon className='shrink-0 w-8 h-8 text-rose-500' />
+                      <SparklesIcon className='h-8 w-8 shrink-0 text-rose-500' />
                       <span className='text-xl font-semibold tracking-wide'>
                         Supa<span className='text-rose-500'>Vacation</span>
                       </span>
@@ -195,13 +195,13 @@ const AuthModal = ({
 
                   <Dialog.Title
                     as='h3'
-                    className='mt-6 font-bold text-lg sm:text-2xl text-center'
+                    className='mt-6 text-center text-lg font-bold sm:text-2xl'
                   >
                     {showSignIn ? 'Welcome back!' : 'Create your account'}
                   </Dialog.Title>
 
                   {!showSignIn ? (
-                    <Dialog.Description className='mt-2 text-gray-500 text-base text-center'>
+                    <Dialog.Description className='mt-2 text-center text-base text-gray-500'>
                       Please create an account to list your homes and bookmark
                       your favorite ones.
                     </Dialog.Description>
@@ -212,7 +212,7 @@ const AuthModal = ({
                     <button
                       disabled={disabled}
                       onClick={() => signInWithGoogle()}
-                      className='h-[46px] w-full mx-auto border rounded-md p-2 flex justify-center items-center space-x-2 text-gray-500 hover:text-gray-600 hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-4 focus:ring-gray-400 focus:ring-opacity-25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:text-gray-500 disabled:hover:bg-transparent disabled:hover:border-gray-200 transition-colors'
+                      className='mx-auto flex h-[46px] w-full items-center justify-center space-x-2 rounded-md border p-2 text-gray-500 transition-colors hover:border-gray-400 hover:bg-gray-50 hover:text-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-400 focus:ring-opacity-25 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-gray-200 disabled:hover:bg-transparent disabled:hover:text-gray-500'
                     >
                       <Image
                         src='/google.svg'
@@ -243,7 +243,7 @@ const AuthModal = ({
                           <button
                             type='submit'
                             disabled={disabled || !isValid}
-                            className='mt-6 w-full bg-rose-600 text-white py-2 px-8 rounded-md focus:outline-none focus:ring-4 focus:ring-rose-600 focus:ring-opacity-50 hover:bg-rose-500 transition disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-rose-600'
+                            className='mt-6 w-full rounded-md bg-rose-600 py-2 px-8 text-white transition hover:bg-rose-500 focus:outline-none focus:ring-4 focus:ring-rose-600 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-rose-600'
                           >
                             {isSubmitting
                               ? 'Loading...'
@@ -261,7 +261,7 @@ const AuthModal = ({
                                     setShowSignIn(false)
                                     resetForm()
                                   }}
-                                  className='underline underline-offset-1 font-semibold text-rose-500 hover:text-rose-600 disabled:hover:text-rose-500 disabled:opacity-50 disabled:cursor-not-allowed'
+                                  className='font-semibold text-rose-500 underline underline-offset-1 hover:text-rose-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:text-rose-500'
                                 >
                                   Sign up
                                 </button>
@@ -277,7 +277,7 @@ const AuthModal = ({
                                     setShowSignIn(true)
                                     resetForm()
                                   }}
-                                  className='underline underline-offset-1 font-semibold text-rose-500 hover:text-rose-600 disabled:hover:text-rose-500 disabled:opacity-50 disabled:cursor-not-allowed'
+                                  className='font-semibold text-rose-500 underline underline-offset-1 hover:text-rose-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:text-rose-500'
                                 >
                                   Log in
                                 </button>

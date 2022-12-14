@@ -8,14 +8,14 @@ import { IHome } from '../../../types/home'
 import { prisma } from '../../../lib/prisma'
 
 const Edit = (home: IHome) => {
-  const updateHome = (data: Partial<IHome>) => {
+  const updateHome = async (data: Partial<IHome>) => {
     console.log('data:', data, 'home:', home)
-    axios.patch(`/api/homes/${home?.id}`, data)
+    await axios.patch(`/api/homes/${home?.id}`, data)
   }
 
   return (
     <Layout>
-      <div className='max-w-screen-sm mx-auto'>
+      <div className='mx-auto max-w-screen-sm'>
         <h1 className='text-xl font-medium text-gray-800'>Edit your home</h1>
         <p className='text-gray-500'>
           Fill out the form below to update your home.

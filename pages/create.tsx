@@ -7,13 +7,13 @@ import { IHome } from '../types/home'
 import { NextPageContext } from 'next'
 
 export default function Create() {
-  const addHome = (data: IHome) => {
-    axios.post('/api/homes', data)
+  const addHome = async (data: IHome) => {
+    await axios.post('/api/homes', data)
   }
 
   return (
     <Layout>
-      <div className='max-w-screen-sm mx-auto'>
+      <div className='mx-auto max-w-screen-sm'>
         <h1 className='text-xl font-medium text-gray-500'>List your home</h1>
         <p className='text-gray-500'>
           Fill out the form below to list a new home.

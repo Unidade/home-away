@@ -14,12 +14,12 @@ const Grid = ({ homes }: IGridProps) => {
   }
 
   return isEmpty ? (
-    <p className='text-amber-700 bg-amber-100 px-4 rounded-md py-2 max-w-max inline-flex items-center space-x-1'>
-      <ExclamationIcon className='shrink-0 w-5 h-5 mt-px' />
+    <p className='inline-flex max-w-max items-center space-x-1 rounded-md bg-amber-100 px-4 py-2 text-amber-700'>
+      <ExclamationIcon className='mt-px h-5 w-5 shrink-0' />
       <span>Unfortunately, there is nothing to display yet.</span>
     </p>
   ) : (
-    <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+    <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
       {homes.map((home: IHome) => (
         <Card key={home.id} {...home} onClickFavorite={toggleFavorite} />
       ))}
