@@ -7,7 +7,7 @@ import ListingForm from '../../../components/ListingForm'
 import { IHome } from '../../../types/home'
 import { prisma } from '../../../lib/prisma'
 
-const Edit = (home: IHome | undefined) => {
+const Edit = (home: IHome) => {
   const updateHome = (data: Partial<IHome>) => {
     console.log('data:', data, 'home:', home)
     axios.patch(`/api/homes/${home?.id}`, data)
@@ -53,7 +53,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   })
 
   const id = context?.params?.id
-  const home = user?.listedHomes.find((home: IHome) => home.id === id)
+  const home = user?.listedHomes.find((home) => home.id === id)
   if (!home) {
     return redirect
   }

@@ -4,7 +4,7 @@ import { HeartIcon } from '@heroicons/react/solid'
 import { IHome } from '../types/home'
 
 interface ICardsProps extends IHome {
-  favorite: boolean
+  favorite?: boolean
   onClickFavorite: (id: string) => void
 }
 
@@ -17,6 +17,7 @@ const Card = ({
   baths = 0,
   price = 0,
   favorite = false,
+
   onClickFavorite = () => null,
 }: ICardsProps) => (
   <Link className='block w-full' href={`/homes/${id}`}>

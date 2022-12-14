@@ -5,15 +5,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'get') {
+  if (req.method === 'GET') {
     try {
       const { id } = req.query
-      const { ownerId } = await prisma.home.findUnique({
+      const owner = await prisma.home.findUnique({
         where: { id: id as string },
         select: { owner: { select: { id: true } } },
       })
-      if (ownerId) {
-        res.status(200).json({ ownerId })
+      if (owner) {
+        res.status(200).json(owner)
       } else {
         throw new Error(`Owner of the home with id:${id} not found`)
       }

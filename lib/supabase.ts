@@ -1,13 +1,13 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import checkEnv from '../utils/getEnv'
 
 const SUPABASE_URL = checkEnv(process.env.SUPABASE_URL)
 const SUPABASE_KEY = checkEnv(process.env.SUPABASE_KEY)
 
-// create supabase client
-export const supabase =
-  global.supabase || createClient(SUPABASE_URL, SUPABASE_KEY)
-
-if (process.env.NODE_ENV !== 'production') {
-  global.supabase = supabase
+const globalForSupabase = global as unknown as {
+  supabase: SupabaseClient<any, 'public', any>
 }
+export const supabase =
+  globalForSupabase.supabase || createClient(SUPABASE_URL, SUPABASE_KEY)
+
+if (process.env.NODE_ENV !== 'production') globalForSupabase.supabase = supabase

@@ -3,12 +3,13 @@ import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
 
 import { IHome } from '../../types/home'
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 import { prisma } from '../../lib/prisma'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
+
+let sideEffectCount = 0
 
 /**
  * Individual page for each home
@@ -26,6 +27,7 @@ export default function ListedHome(home: IHome | null) {
     try {
       toastId = toast.loading('Deleting home...')
       setDeleting(true)
+      console.log(home?.id)
       await axios.delete(`/api/homes/${home?.id}`)
       toast.success('Home deleted', { id: toastId })
       router.push('/homes')
@@ -37,25 +39,22 @@ export default function ListedHome(home: IHome | null) {
   }
 
   useEffect(() => {
-    ;async () => {
-      // check if the user is the owner of the home
-      try {
-        if (session?.user && home?.ownerId) {
-          const ownerId = await (
+    ;(async () => {
+      if (session?.user && home) {
+        console.log(sideEffectCount)
+        sideEffectCount++
+        try {
+          const { owner } = await await (
             await axios.get(`/api/homes/${home.id}/ownerId`)
           ).data
-          console.log('ownerId: ', ownerId)
-          // if the user is the home owner, set isOwner to true
-          setIsOwner(ownerId === home?.ownerId)
-        }
-      } catch (error) {
-        console.error(error)
-        setIsOwner(false)
-      }
-    }
 
-    return () => {}
-  }, [isOwner, session?.user, home?.ownerId])
+          setIsOwner(owner.id === home.ownerId)
+        } catch (e) {
+          setIsOwner(false)
+        }
+      }
+    })() // declare and invoke immediately async function
+  }, [session, home])
 
   if (router.isFallback) {
     return 'Loading'
@@ -129,14 +128,14 @@ export async function getStaticPaths() {
   })
 
   return {
-    paths: homes.map((home: IHome) => ({
+    paths: homes.map((home) => ({
       params: { id: home.id },
     })),
     fallback: true,
   }
 }
 
-export async function getStaticProps({ params }: Params) {
+export async function getStaticProps({ params }: { params: { id: string } }) {
   const home = await prisma.home.findUnique({
     where: { id: params.id },
   })
