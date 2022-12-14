@@ -172,7 +172,7 @@ const Layout = ({ children = null }: ILayoutProps) => {
                   <button
                     type='button'
                     onClick={openModal}
-                    className='ml-4 rounded-md bg-blue-600 px-4 py-1 text-white transition hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-rose-500 focus:ring-opacity-50'
+                    className='ml-4 rounded-md bg-blue-600 px-4 py-1 text-white transition hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50'
                   >
                     Log in
                   </button>
