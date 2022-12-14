@@ -19,7 +19,7 @@
       }
 
       a {
-        color: #f43f5e;
+        color: #1d4ed8;
       }
 
       a img {
@@ -106,11 +106,11 @@
       /* Buttons ------------------------------ */
 
       .button {
-        background-color: #f43f5e;
-        border-top: 10px solid #f43f5e;
-        border-right: 18px solid #f43f5e;
-        border-bottom: 10px solid #f43f5e;
-        border-left: 18px solid #f43f5e;
+        background-color: #1d4ed8;
+        border-top: 10px solid #1d4ed8;
+        border-right: 18px solid #1d4ed8;
+        border-bottom: 10px solid #1d4ed8;
+        border-left: 18px solid #1d4ed8;
         display: inline-block;
         color: #fff !important;
         text-decoration: none;
@@ -178,6 +178,9 @@
       body {
         background-color: #f2f4f6;
         color: #51545e;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       p {
@@ -214,7 +217,7 @@
       }
 
       .email-masthead_name {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: bold;
         color: #a8aaaf;
         text-decoration: none;
@@ -273,6 +276,12 @@
 
       .content-cell {
         padding: 45px;
+      }
+      .text-blue {
+        color: #1d4ed8
+      }
+      .text-gray {
+        color: rgb(31, 41, 55)
       }
       /*Media Queries ------------------------------ */
 
@@ -346,8 +355,8 @@
           >
             <tr>
               <td class="email-masthead">
-                <a href="{{base_url}}" class="f-fallback email-masthead_name">
-                  ✨ SupaVacation
+                <a href="{{base_url}}" class="f-fallback email-masthead_name text-gray">
+                  <span class="text-gray">Home</span><span class="text-blue">Away<span>
                 </a>
               </td>
             </tr>
@@ -372,8 +381,7 @@
                     <td class="content-cell">
                       <div class="f-fallback">
                         <p>
-                          Click the button below to log in to SupaVacation.<br />
-                          This button will expire in 10 minutes.
+                          Welcome to <strong><span class="text-gray"> Home</span><span class="text-blue">Away</span></strong> Click the button below to log in to your account. This login link will expire in <strong>10 minutes</strong>, so be sure to use it promptly.
                         </p>
                         <!-- Action -->
                         <table
@@ -396,12 +404,12 @@
                                 role="presentation"
                               >
                                 <tr>
-                                  <td>
+                                  <td style="text-align: center;">
                                     <a
                                       href="{{signin_url}}"
                                       class="f-fallback button"
                                       target="_blank"
-                                      >Login to SupaVacation</a
+                                      >Login to HomeAway</a
                                     >
                                   </td>
                                 </tr>
@@ -413,7 +421,7 @@
                           Confirming this request will securely log you in using
                           {{email}}.
                         </p>
-                        <p>Best,<br />The SupaVacation Team</p>
+                        <p>Best,<br />The HomeAway Team</p>
                         <!-- Sub copy -->
                         <table class="body-sub" role="presentation">
                           <tr>
@@ -446,7 +454,7 @@
                   <tr>
                     <td class="content-cell" align="center">
                       <p class="f-fallback sub align-center">
-                        &copy; 2022 SupaVacation. All rights reserved.
+                        &copy; 2022 HomeAway. All rights reserved.
                       </p>
                     </td>
                   </tr>
