@@ -23,6 +23,7 @@ model Home {
   updatedAt   DateTime @updatedAt
   owner       User     @relation(fields: [ownerId], references: [id])
   ownerId     String
+  favoritedBy User[]   @relation(name: "favoritesHomes")
 }
 
 model Account {
@@ -63,6 +64,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   listedHomes   Home[]
+  favoriteHomes Home[]    @relation(name: "favoritesHomes")
 }
 
 model VerificationToken {
