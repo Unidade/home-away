@@ -67,15 +67,12 @@ const Layout = ({ children = null }: ILayoutProps) => {
       </Head>
 
       <div className='flex min-h-screen flex-col '>
-        <header
-          className='sticky top-0 z-10 h-16 w-full 
-         bg-white/90 shadow-md backdrop-blur-md '
-        >
+        <header className='sticky top-0 z-10 h-16 w-full bg-white/90 shadow-sm drop-shadow-sm backdrop-blur-md '>
           <div className='container mx-auto h-full'>
             <div className='flex h-full items-center justify-between space-x-4 px-4'>
               <Link className='flex items-center space-x-1' href='/'>
                 <OfficeBuildingIcon className='h-8 w-8 shrink-0 text-blue-700/80' />
-                <span className='text-xl font-semibold tracking-wide'>
+                <span className='text-xl font-semibold tracking-wide text-gray-800'>
                   Home<span className='text-blue-700'>Away</span>
                 </span>
               </Link>
@@ -85,7 +82,7 @@ const Layout = ({ children = null }: ILayoutProps) => {
                   onClick={() =>
                     session?.user ? router.push('/create') : openModal()
                   }
-                  className='hidden rounded-md px-3 py-1 transition hover:bg-gray-200 sm:block'
+                  className='hidden rounded-md px-3 py-1 font-medium text-gray-700 transition hover:bg-gray-100 sm:block'
                 >
                   List your home
                 </button>
@@ -94,19 +91,18 @@ const Layout = ({ children = null }: ILayoutProps) => {
                 ) : user ? (
                   <Menu as='div' className='relative z-50'>
                     <Menu.Button className='group flex items-center space-x-px '>
-                      <div className='rounded-full bg-gradient-to-r from-blue-600 to-sky-700'>
-                        <div className='relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white'>
-                          {user?.image ? (
-                            <Image
-                              src={user?.image}
-                              alt={user?.name || 'Avatar'}
-                              fill
-                            />
-                          ) : (
-                            <UserIcon className='h-6 w-6 text-gray-400' />
-                          )}
-                        </div>
+                      <div className='relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border p-4'>
+                        {user?.image ? (
+                          <Image
+                            src={user?.image}
+                            alt={user?.name || 'Avatar'}
+                            fill
+                          />
+                        ) : (
+                          <UserIcon className='h-6 w-6 text-gray-400' />
+                        )}
                       </div>
+
                       <ChevronDownIcon className='h-5 w-5 shrink-0 text-gray-500 group-hover:text-current' />
                     </Menu.Button>
                     <Transition
