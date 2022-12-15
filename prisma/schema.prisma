@@ -20,7 +20,7 @@ model Home {
   updatedAt   DateTime @updatedAt
   ownerId     String
   owner       User     @relation(fields: [ownerId], references: [id])
-  favoriteBy  User[]   @relation(name: "favoritesHomes")
+  favoriteBy  User[]   @relation(name: "FavoritesHomes")
 }
 
 model Account {
@@ -60,7 +60,7 @@ model User {
   accounts      Account[]
   listedHomes   Home[]
   sessions      Session[]
-  favoriteHomes Home[]    @relation(name: "favoritesHomes")
+  favoriteHomes Home[]    @relation(name: "FavoritesHomes")
 }
 
 model VerificationToken {
