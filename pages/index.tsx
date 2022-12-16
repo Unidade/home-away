@@ -11,7 +11,7 @@ export async function getStaticProps() {
   console.log(homes)
   return {
     props: { homes: JSON.parse(JSON.stringify(homes)) },
-    revalidate: 10,
+    revalidate: 2,
   }
 }
 

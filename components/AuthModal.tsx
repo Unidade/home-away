@@ -68,7 +68,7 @@ const Confirm = ({ show = false, email = '' }) => (
 )
 
 interface IAuthModalProps {
-  show?: boolean
+  show: boolean
   onClose: () => void
 }
 
