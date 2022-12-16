@@ -4,8 +4,9 @@ import { HeartIcon } from '@heroicons/react/solid'
 import { IHome } from '../types/home'
 import { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-import { useSWRConfig } from 'swr'
+
 import { useSession } from 'next-auth/react'
+import { useFavorites } from 'hooks/useFavorites'
 
 interface ICardsProps extends IHome {
   isFavorite?: boolean
@@ -23,25 +24,32 @@ const Card = ({
 }: ICardsProps) => {
   const [favorite, setFavorite] = useState(false)
   const { data: session } = useSession()
-  const { mutate } = useSWRConfig()
-
+  const { favorites, mutate } = useFavorites()
   useEffect(() => {
     if (isFavorite) {
       setFavorite(true)
     }
   }, [isFavorite])
 
+  const addToFavorites = async (homeID: string) =>
+    await fetch(`/api/homes/${homeID}/favorite`, { method: 'PUT' })
+  const removeFromFavorites = async (homeID: string) =>
+    await fetch(`/api/homes/${homeID}/favorite`, { method: 'DELETE' })
+
   const debouncedSubmitLike = useDebouncedCallback((homeID: string) => {
     if (session) {
       if (favorite) {
-        fetch(`/api/homes/${homeID}/favorite`, { method: 'PUT' })
+        addToFavorites(homeID)
+        mutate()
       } else {
-        fetch(`/api/homes/${homeID}/favorite`, { method: 'DELETE' })
+        removeFromFavorites(homeID)
+        mutate(
+          favorites.filter((home: IHome) => home.id !== homeID),
+          true
+        )
       }
-      mutate(`/api/users/${session.user.id}/favorites`)
-      console.log("mutating")
     }
-  }, 700)
+  }, 100)
   return (
     <Link className='block w-full' href={`/homes/${id}`}>
       <div className='relative'>

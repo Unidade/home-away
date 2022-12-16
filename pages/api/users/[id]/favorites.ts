@@ -20,16 +20,21 @@ export default async function handler(
   }
 
   if (req.method === 'GET') {
-    // Retrieve home ID from request body
-    const favorite = await prisma.user.findMany({
-      where: { id: id },
-      select: {
-        favoriteHomes: true,
-      },
-    })
-    // Return favoritesHomes array
-    const favoriteHomes = favorite[0].favoriteHomes
-    res.status(200).json(favoriteHomes)
+    try {
+      // Retrieve home ID from request body
+      const favorite = await prisma.user.findMany({
+        where: { id: id },
+        select: {
+          favoriteHomes: true,
+        },
+      })
+      // Return favoritesHomes array empty or not
+      const favoriteHomes =
+        favorite.length === 0 ? favorite : favorite[0].favoriteHomes
+      res.status(200).json(favoriteHomes)
+    } catch (error) {
+      res.status(500).json({ message: 'Internal server error' })
+    }
   }
   // Unsupported method
   else {

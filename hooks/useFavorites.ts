@@ -1,9 +1,13 @@
-import swr from 'swr'
+import swr, { KeyedMutator } from 'swr'
 import { fetchJSON } from 'lib/fetchJSON'
+import { useSession } from 'next-auth/react'
+import { IHome } from 'types/home'
 
-export function useFavorites(id: string) {
-  const { data, isLoading, error } = swr(
-    `/api/users/${id}/favorites`,
+export function useFavorites(): useFavoritesReturn {
+  const { data: session } = useSession()
+  const user = session?.user
+  const { data, isLoading, error, mutate } = swr(
+    user ? `/api/users/${user.id}/favorites` : null,
     fetchJSON
   )
 
@@ -11,5 +15,13 @@ export function useFavorites(id: string) {
     favorites: data,
     isLoading,
     error,
+    mutate,
   }
+}
+
+interface useFavoritesReturn {
+  favorites: IHome[]
+  isLoading: boolean
+  error: Error
+  mutate: KeyedMutator<any>
 }

@@ -56,7 +56,7 @@ const sendWelcomeEmail = async ({ user }: { user: User }) => {
     })
     const emailTemplate = Handlebars.compile(emailFile)
     await transporter.sendMail({
-      from: `"Home Away - " ${process.env.EMAIL_FROM}`,
+      from: `"Home Away " ${process.env.EMAIL_FROM}`,
       to: email as string,
       subject: 'Welcome to HomeAway',
       html: emailTemplate({
