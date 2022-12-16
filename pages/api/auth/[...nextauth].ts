@@ -60,7 +60,8 @@ const sendWelcomeEmail = async ({ user }: { user: User }) => {
       to: email as string,
       subject: 'Welcome to HomeAway',
       html: emailTemplate({
-        base_url: process.env.NEXT_PUBLIC_VERCEL_URL as string,
+        base_url:
+          process.env.NEXT_PUBLIC_VERCEL_URL || process.env.NEXTAUTH_URL,
         support_url: `${process.env.NEXTAUTH_URL}/support`,
       }),
     })
