@@ -1,31 +1,27 @@
 import Grid from 'components/Grid'
 import Layout from 'components/Layout'
-import { fetchJSON } from 'lib/fetchJSON'
-import { useSession } from 'next-auth/react'
-import swr from 'swr'
+import LoadingSpinner from 'components/LoadingSpinner'
+import { useFavorites } from 'hooks/useFavorites'
 
 const Favorites = () => {
-  const { data: session } = useSession()
-  const user = session?.user
-  console.log(session)
-  const {
-    data: homes,
-    isLoading,
-    error,
-  } = swr(user ? `/api/users/${session.user.id}/favorites` : null, fetchJSON)
-  console.log(homes)
-  if (error) return <div>failed to load</div>
+  const { favorites: homes, isLoading } = useFavorites()
+  console.log(isLoading)
   if (isLoading)
     return (
       <Layout>
-        <h1 className='text-xl font-medium text-gray-800'>My favorites</h1>
-        <Grid homes={[]} />
+        <h1 className='text-center text-xl font-medium text-gray-800'>
+          My favorites
+        </h1>
+        <LoadingSpinner />
       </Layout>
     )
+  console.log(homes)
   if (homes) {
     return (
       <Layout>
-        <h1 className='text-xl font-medium text-gray-800'>My favorites</h1>
+        <h1 className='text-center text-xl font-medium text-gray-800'>
+          My favorites
+        </h1>
         <Grid homes={homes} />
       </Layout>
     )
