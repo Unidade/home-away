@@ -44,12 +44,11 @@ const menuItems = [
   },
 ]
 
-const Layout = ({ children = null }: ILayoutProps) => {
+const Layout = ({ children }: ILayoutProps) => {
   const router = useRouter()
   const { data: session, status } = useSession()
   const user = session?.user
   const isLoadingUser = status === 'loading'
-
   const [showModal, setShowModal] = useState(false)
 
   const openModal = () => setShowModal(true)
@@ -61,7 +60,7 @@ const Layout = ({ children = null }: ILayoutProps) => {
         <title>HomeAway</title>
         <meta
           name='title'
-          content='Fullstack App with Next.js, Supabase & Prisma'
+          content='Fullstack App with Next.js, NextAuth, Supabase & Prisma'
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
