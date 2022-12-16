@@ -12,11 +12,11 @@ const Grid = ({ homes }: IGridProps) => {
   const { data: session } = useSession()
   const id = session?.user.id
   console.log(session)
-  const { data } = swr(id ? `/api/user/${id}/favorites` : null, fetchJSON)
+  const { data } = swr(id ? `/api/users/${id}/favorites` : null, fetchJSON)
 
   const isEmpty = homes.length === 0
   console.log(data)
-
+  console.log(homes)
   return isEmpty ? (
     <p className='inline-flex max-w-max items-center space-x-1 rounded-md bg-amber-100 px-4 py-2 text-amber-700'>
       <ExclamationIcon className='mt-px h-5 w-5 shrink-0' />
@@ -28,7 +28,11 @@ const Grid = ({ homes }: IGridProps) => {
         <Card
           key={home.id}
           {...home}
-          isFavorite={data?.length !== 0 && data?.includes(home.id)}
+          isFavorite={
+            data &&
+            data?.length !== 0 &&
+            data.filter((fav: IHome) => fav.id === home.id).length !== 0
+          }
         />
       ))}
     </div>

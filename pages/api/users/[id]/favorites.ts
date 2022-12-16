@@ -24,11 +24,11 @@ export default async function handler(
     const favorite = await prisma.user.findMany({
       where: { id: id },
       select: {
-        favoriteHomes: { select: { id: true } },
+        favoriteHomes: true,
       },
     })
     // Return favoritesHomes array
-    const favoriteHomes = favorite[0].favoriteHomes.map((home) => home.id)
+    const favoriteHomes = favorite[0].favoriteHomes
     res.status(200).json(favoriteHomes)
   }
   // Unsupported method

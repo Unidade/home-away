@@ -57,7 +57,9 @@ const ListingForm = ({
     }
   }
 
-  const handleOnSubmit = async (values: Omit<IHome, 'image' | 'id'>) => {
+  const handleOnSubmit = async (
+    values: Omit<IHome, 'image' | 'id' | 'createdAt' | 'updatedAt' | 'ownerId'>
+  ) => {
     console.log(values)
     let toastId
     try {
@@ -165,7 +167,7 @@ const ListingForm = ({
               <button
                 type='submit'
                 disabled={disabled || !isValid}
-                className='rounded-md bg-rose-600 py-2 px-6 text-white transition hover:bg-rose-500 focus:outline-none focus:ring-4 focus:ring-rose-600 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-rose-600'
+                className='rounded-md bg-blue-600 py-2 px-6 text-white transition hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-blue-600'
               >
                 {isSubmitting ? 'Submitting...' : buttonText}
               </button>
@@ -178,7 +180,10 @@ const ListingForm = ({
 }
 
 interface IListingForm {
-  initialValues?: IHome
+  initialValues?: Pick<
+    IHome,
+    'baths' | 'beds' | 'title' | 'description' | 'price' | 'guests' | 'image'
+  >
   redirectPath: string
   buttonText: string
   onSubmit: (data: any) => Promise<void>

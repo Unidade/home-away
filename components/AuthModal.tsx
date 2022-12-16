@@ -45,7 +45,7 @@ const Confirm = ({ show = false, email = '' }) => (
           <div className='transform overflow-hidden transition-all'>
             <h3 className='text-center text-lg font-medium leading-6'>
               <div className='flex flex-col items-center justify-center space-y-4'>
-                <MailOpenIcon className='h-12 w-12 shrink-0 text-rose-500' />
+                <MailOpenIcon className='h-12 w-12 shrink-0 text-blue-500' />
               </div>
               <p className='mt-2 text-2xl font-semibold'>Confirm your email</p>
             </h3>
@@ -186,9 +186,9 @@ const AuthModal = ({
                 <div className='px-4 sm:px-12'>
                   <div className='flex justify-center'>
                     <Link className='flex items-center space-x-1' href='/'>
-                      <SparklesIcon className='h-8 w-8 shrink-0 text-rose-500' />
+                      <SparklesIcon className='h-8 w-8 shrink-0 text-blue-500' />
                       <span className='text-xl font-semibold tracking-wide'>
-                        Supa<span className='text-rose-500'>Vacation</span>
+                        Home<span className='text-blue-500'>Away</span>
                       </span>
                     </Link>
                   </div>
@@ -243,7 +243,7 @@ const AuthModal = ({
                           <button
                             type='submit'
                             disabled={disabled || !isValid}
-                            className='mt-6 w-full rounded-md bg-rose-600 py-2 px-8 text-white transition hover:bg-rose-500 focus:outline-none focus:ring-4 focus:ring-rose-600 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-rose-600'
+                            className='mt-6 w-full rounded-md bg-blue-600 py-2 px-8 text-white transition hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-600 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-blue-600'
                           >
                             {isSubmitting
                               ? 'Loading...'
@@ -261,7 +261,7 @@ const AuthModal = ({
                                     setShowSignIn(false)
                                     resetForm()
                                   }}
-                                  className='font-semibold text-rose-500 underline underline-offset-1 hover:text-rose-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:text-rose-500'
+                                  className='font-semibold text-blue-500 underline underline-offset-1 hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:text-blue-500'
                                 >
                                   Sign up
                                 </button>
@@ -277,7 +277,7 @@ const AuthModal = ({
                                     setShowSignIn(true)
                                     resetForm()
                                   }}
-                                  className='font-semibold text-rose-500 underline underline-offset-1 hover:text-rose-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:text-rose-500'
+                                  className='font-semibold text-blue-500 underline underline-offset-1 hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:text-blue-500'
                                 >
                                   Log in
                                 </button>

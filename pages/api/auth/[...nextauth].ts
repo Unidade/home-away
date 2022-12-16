@@ -36,9 +36,9 @@ const sendVerificationRequest = ({
   })
   const emailTemplate = Handlebars.compile(emailFile)
   transporter.sendMail({
-    from: `"✨ SupaVacation" ${process.env.EMAIL_FROM}`,
+    from: `"HomeAway -" ${process.env.EMAIL_FROM}`,
     to: identifier,
-    subject: 'Your sign-in link for SupaVacation',
+    subject: 'Your sign-in link for HomeAway',
     html: emailTemplate({
       base_url: process.env.NEXTAUTH_URL,
       signin_url: url,
@@ -56,9 +56,9 @@ const sendWelcomeEmail = async ({ user }: { user: User }) => {
     })
     const emailTemplate = Handlebars.compile(emailFile)
     await transporter.sendMail({
-      from: `"✨ SupaVacation" ${process.env.EMAIL_FROM}`,
+      from: `"Home Away - " ${process.env.EMAIL_FROM}`,
       to: email as string,
-      subject: 'Welcome to SupaVacation',
+      subject: 'Welcome to HomeAway',
       html: emailTemplate({
         base_url: process.env.NEXTAUTH_URL,
         support_url: `${process.env.NEXTAUTH_URL}/support`,
