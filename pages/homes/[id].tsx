@@ -39,9 +39,6 @@ export default function ListedHome(home: IHome) {
     }
   }, [session, home])
 
-  if (router.isFallback) {
-    return 'Loading'
-  }
   return (
     <Layout>
       <div className='mx-auto max-w-screen-lg'>
