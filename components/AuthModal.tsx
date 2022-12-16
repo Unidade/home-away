@@ -6,7 +6,11 @@ import * as Yup from 'yup'
 import { toast } from 'react-hot-toast'
 import { Formik, Form } from 'formik'
 import { Transition, Dialog } from '@headlessui/react'
-import { SparklesIcon, MailOpenIcon, XIcon } from '@heroicons/react/outline'
+import {
+  MailOpenIcon,
+  XIcon,
+  OfficeBuildingIcon,
+} from '@heroicons/react/outline'
 import { signIn } from 'next-auth/react'
 import Input from './Input'
 
@@ -186,7 +190,7 @@ const AuthModal = ({
                 <div className='px-4 sm:px-12'>
                   <div className='flex justify-center'>
                     <Link className='flex items-center space-x-1' href='/'>
-                      <SparklesIcon className='h-8 w-8 shrink-0 text-blue-500' />
+                      <OfficeBuildingIcon className='h-8 w-8 shrink-0 text-blue-700/80' />
                       <span className='text-xl font-semibold tracking-wide'>
                         Home<span className='text-blue-500'>Away</span>
                       </span>

@@ -27,25 +27,25 @@ const Card = ({
   const { favorites, mutate } = useFavorites()
   useEffect(() => {
     if (isFavorite) {
-      setFavorite(true)
+      setFavorite(isFavorite)
     }
   }, [isFavorite])
 
-  const addToFavorites = async (homeID: string) =>
-    await fetch(`/api/homes/${homeID}/favorite`, { method: 'PUT' })
-  const removeFromFavorites = async (homeID: string) =>
-    await fetch(`/api/homes/${homeID}/favorite`, { method: 'DELETE' })
+  const addToFavorites = (homeID: string) =>
+    fetch(`/api/homes/${homeID}/favorite`, { method: 'PUT' })
+  const removeFromFavorites = (homeID: string) =>
+    fetch(`/api/homes/${homeID}/favorite`, { method: 'DELETE' })
 
-  const debouncedSubmitLike = useDebouncedCallback((homeID: string) => {
+  const debouncedSubmitLike = useDebouncedCallback(async (homeID: string) => {
     if (session) {
       if (favorite) {
-        addToFavorites(homeID)
+        await addToFavorites(homeID)
         mutate()
       } else {
         removeFromFavorites(homeID)
         mutate(
           favorites.filter((home: IHome) => home.id !== homeID),
-          true
+          { revalidate: false }
         )
       }
     }

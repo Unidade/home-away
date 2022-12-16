@@ -9,7 +9,7 @@ interface IGridProps {
 const Grid = ({ homes = [] }: IGridProps) => {
   const { favorites } = useFavorites()
   const isEmpty = homes.length === 0
-  console.log(favorites)
+  console.log(homes)
   return isEmpty ? (
     <p className='inline-flex max-w-max items-center space-x-1 rounded-md bg-amber-100 px-4 py-2 text-amber-700'>
       <ExclamationIcon className='mt-px h-5 w-5 shrink-0' />
