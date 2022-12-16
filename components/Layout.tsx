@@ -18,7 +18,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 import { useSession, signOut } from 'next-auth/react'
 
 interface ILayoutProps {
-  children?: React.ReactNode | Function
+  children?: React.ReactNode
 }
 
 const menuItems = [
@@ -83,7 +83,7 @@ const Layout = ({ children }: ILayoutProps) => {
       </Head>
 
       <div className='flex min-h-screen flex-col '>
-        <header className='sticky top-0 z-10 h-16 w-full bg-white/90 shadow-sm drop-shadow-sm backdrop-blur-md '>
+        <header className='sticky top-0 z-10 h-16 w-full shadow-sm drop-shadow-sm backdrop-blur-md '>
           <div className='container mx-auto h-full'>
             <div className='flex h-full items-center justify-between space-x-4 px-4'>
               <Link className='flex items-center space-x-1' href='/'>
@@ -103,11 +103,11 @@ const Layout = ({ children }: ILayoutProps) => {
                   List your home
                 </button>
                 {isLoadingUser ? (
-                  <div className='h-8 w-[75px] animate-pulse rounded-md bg-gray-200' />
+                  <div className='h-8 w-[75px] animate-pulse rounded-md ' />
                 ) : user ? (
                   <Menu as='div' className='relative z-50'>
                     <Menu.Button className='group flex items-center space-x-px '>
-                      <div className='relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border p-4'>
+                      <div className='relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border'>
                         {user?.image ? (
                           <Image
                             src={user?.image}
@@ -199,9 +199,7 @@ const Layout = ({ children }: ILayoutProps) => {
         </header>
 
         <main className='container mx-auto flex-grow'>
-          <div className='px-4 py-12'>
-            {typeof children === 'function' ? children(openModal) : children}
-          </div>
+          <div className='px-4 py-12'>{children}</div>
         </main>
 
         <AuthModal show={showModal} onClose={closeModal} />
