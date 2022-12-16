@@ -1,11 +1,9 @@
-export interface IHome {
-  id: string
-  title: string
-  description: string
-  image: string
-  guests: number
-  beds: number
-  baths: number
-  price: number
-  ownerId: string
+import { Prisma } from '@prisma/client'
+
+export type IHome = Prisma.HomeCreateInput
+export interface IFavoriteHomes {
+  favoriteHomes: {
+    id: string
+  }[]
 }
+;[]
