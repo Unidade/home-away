@@ -83,7 +83,7 @@ const Layout = ({ children }: ILayoutProps) => {
       </Head>
 
       <div className='flex min-h-screen flex-col '>
-        <header className='sticky top-0 z-10 h-16 w-full shadow-sm drop-shadow-sm backdrop-blur-md '>
+        <header className='sticky top-0 z-10 h-16 w-full bg-white/90 shadow-sm drop-shadow-sm backdrop-blur-md'>
           <div className='container mx-auto h-full'>
             <div className='flex h-full items-center justify-between space-x-4 px-4'>
               <Link className='flex items-center space-x-1' href='/'>
