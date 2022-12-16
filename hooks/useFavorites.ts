@@ -6,7 +6,7 @@ import { IHome } from 'types/home'
 export function useFavorites(): useFavoritesReturn {
   const { data: session } = useSession()
   const user = session?.user
-  const { data, isLoading, error, mutate } = swr(
+  const { data, isLoading, error, mutate, isValidating } = swr(
     user ? `/api/users/${user.id}/favorites` : null,
     fetchJSON
   )
@@ -16,6 +16,7 @@ export function useFavorites(): useFavoritesReturn {
     isLoading,
     error,
     mutate,
+    isValidating,
   }
 }
 
@@ -24,4 +25,5 @@ interface useFavoritesReturn {
   isLoading: boolean
   error: Error
   mutate: KeyedMutator<any>
+  isValidating: boolean
 }
