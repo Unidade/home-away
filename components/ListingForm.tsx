@@ -95,7 +95,7 @@ const ListingForm = ({
     <div>
       <div className='mb-8 max-w-md'>
         <ImageUpload
-          initialImage={{ src: image, alt: initialFormValues.title }}
+          initialImage={{ src: image as string, alt: initialFormValues.title }}
           onChangePicture={upload}
         />
       </div>
