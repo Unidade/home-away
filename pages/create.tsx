@@ -1,6 +1,5 @@
 import Layout from '../components/Layout'
 import ListingForm from '../components/ListingForm'
-import axios from 'axios'
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 import { unstable_getServerSession } from 'next-auth/next'
 import { GetServerSideProps } from 'next'
@@ -9,7 +8,13 @@ import { IHome } from '../types/home'
 
 export default function Create() {
   const addHome = async (data: IHome) => {
-    await axios.post('/api/homes', data)
+    await fetch('/api/homes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
   }
 
   return (

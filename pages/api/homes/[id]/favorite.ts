@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
 import { prisma } from 'lib/prisma'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { unstable_getServerSession } from 'next-auth'
 
 const UNAUTHENTICATED = 401
 
@@ -8,7 +9,7 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req })
+  const session = await await unstable_getServerSession(req, res, authOptions)
   if (!session?.user) {
     return res.status(UNAUTHENTICATED).json({
       message: 'The request lacks valid authentication credentials ',

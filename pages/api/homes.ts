@@ -1,13 +1,14 @@
-import { getSession } from 'next-auth/react'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../lib/prisma'
+import { unstable_getServerSession } from 'next-auth'
+import { authOptions } from './auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   // Check if user is authenticated
-  const session = await getSession({ req })
+  const session = await unstable_getServerSession(req, res, authOptions)
 
   // If no session exists, return 401 status code unauthorized
   if (!session) {
