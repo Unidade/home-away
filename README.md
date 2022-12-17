@@ -1,5 +1,7 @@
 # HomeAway
 
+![]()
+
 ## Description
 
 HomeAway is a Airbn-like application that was created with a range of powerful technologies including NextJS, NextAuth, TailwindCSS, Prisma, and Supabase. It boasts a variety of features that make it easy for users to login or signup with their Google account or using magic links. You can save your favorite houses and even list your own property on the platform. Each house has its own dedicated page that is generated at build time using dynamic routing, thanks to NextJS' getStaticPaths and getStaticProps functions.
@@ -8,7 +10,7 @@ Prisma serves as a bridge between the application and our cloud-based PostgreSQL
 
 I have dedicated a significant amount of time to improving the SEO, boosting performance, and making the design responsive. As a result, I was able to achieve a score of 100 on Lighthouse for the website.
 
-![]()
+![](public/lighthouseScore.png)
 
 ## Getting Started
 
