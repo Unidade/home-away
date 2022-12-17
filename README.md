@@ -1,6 +1,6 @@
 # HomeAway
 
-![]()
+![screenshot](public/homeAwayScreenShot.png)
 
 ## Description
 
@@ -10,9 +10,11 @@ Prisma serves as a bridge between the application and our cloud-based PostgreSQL
 
 I have dedicated a significant amount of time to improving the SEO, boosting performance, and making the design responsive. As a result, I was able to achieve a score of 100 on Lighthouse for the website.
 
-![](public/lighthouseScore.png)
+![lighthouse screenshot](public/lighthouseScore.png)
 
 ## Getting Started
+
+You can deploy locally or visit the [Live Demo](https://homeaway-unidade.vercel.app/)
 
 First, install the dependencies:
 
