@@ -40,7 +40,7 @@ const sendVerificationRequest = async ({
     to: identifier,
     subject: 'Your sign-in link for HomeAway',
     html: emailTemplate({
-      base_url: process.env.NEXTAUTH_URL,
+      base_url: process.env.NEXT_PUBLIC_VERCEL_URL || process.env.NEXTAUTH_URL,
       signin_url: url,
       email: identifier,
     }),
