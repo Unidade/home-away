@@ -51,12 +51,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     authOptions
   )
 
-  if (!session || !session.user || !session.user.email) {
+  if (!session) {
     return redirect
   }
 
   const user = await prisma.user.findUnique({
-    where: { email: session.user.email },
+    where: { email: session.user.email as string },
     select: { listedHomes: true },
   })
 
