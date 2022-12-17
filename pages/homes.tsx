@@ -36,7 +36,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       where: { owner: { email: session.user.email } },
       orderBy: { createdAt: 'desc' },
     })
-
+    context.res.setHeader(
+      'Cache-Control',
+      'public, max-age=31536000, immutable'
+    )
     return {
       props: { homes: JSON.parse(JSON.stringify(homes)) },
     }
