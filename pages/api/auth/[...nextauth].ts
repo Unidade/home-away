@@ -27,7 +27,7 @@ const transporter = nodemailer.createTransport({
 
 const emailsDir = path.resolve(process.cwd(), 'emails')
 
-const sendVerificationRequest = ({
+const sendVerificationRequest = async ({
   identifier,
   url,
 }: Pick<SendVerificationRequestParams, 'identifier' | 'url'>) => {
@@ -35,7 +35,7 @@ const sendVerificationRequest = ({
     encoding: 'utf8',
   })
   const emailTemplate = Handlebars.compile(emailFile)
-  transporter.sendMail({
+  await transporter.sendMail({
     from: `"HomeAway -" ${process.env.EMAIL_FROM}`,
     to: identifier,
     subject: 'Your sign-in link for HomeAway',
