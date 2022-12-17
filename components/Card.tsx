@@ -61,9 +61,10 @@ const Card = ({
               src={image}
               alt={title}
               fill
-              sizes='(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              20vw'
+              sizes='(min-width: 600px) 50vw,
+              (min-width: 1000px) 33vw,
+              (min-width: 1320px) 20vw,
+              100vw'
               className='object-cover transition hover:opacity-80'
             />
           ) : null}
