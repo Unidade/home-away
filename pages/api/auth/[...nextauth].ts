@@ -38,7 +38,7 @@ const sendVerificationRequest = async ({
   })
   const emailTemplate = Handlebars.compile(emailFile)
   await transporter.sendMail({
-    from: `"HomeAway -" ${process.env.EMAIL_FROM}`,
+    from: `"HomeAway" ${process.env.EMAIL_FROM}`,
     to: identifier,
     subject: 'Your sign-in link for HomeAway',
     html: emailTemplate({
@@ -58,7 +58,7 @@ const sendWelcomeEmail = async ({ user }: { user: User }) => {
     })
     const emailTemplate = Handlebars.compile(emailFile)
     await transporter.sendMail({
-      from: `"Home Away " ${process.env.EMAIL_FROM}`,
+      from: `"Home Away" ${process.env.EMAIL_FROM}`,
       to: email as string,
       subject: 'Welcome to HomeAway',
       html: emailTemplate({
