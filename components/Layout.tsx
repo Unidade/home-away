@@ -103,7 +103,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   List your home
                 </button>
                 {isLoadingUser ? (
-                  <div className='h-8 w-[75px] animate-pulse rounded-md ' />
+                  <div className='h-8 w-[75px] animate-pulse rounded-md bg-gray-100/70' />
                 ) : user ? (
                   <Menu as='div' className='relative z-50'>
                     <Menu.Button className='group flex items-center space-x-px '>
