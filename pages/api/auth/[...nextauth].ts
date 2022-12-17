@@ -15,6 +15,8 @@ import SMTPTransport from 'nodemailer/lib/smtp-transport'
 // Instantiate Prisma Client
 const prisma = new PrismaClient()
 
+import type { NextAuthOptions } from 'next-auth'
+
 const transporter = nodemailer.createTransport({
   host: checkEnv(process.env.EMAIL_SERVER_HOST),
   port: Number(checkEnv(process.env.EMAIL_SERVER_PORT)), // need to be a number not a string
@@ -70,7 +72,7 @@ const sendWelcomeEmail = async ({ user }: { user: User }) => {
   }
 }
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   // Specify URLs to be used if you want to create custom sign in, sign out and error pages. Pages specified will override the corresponding built-in page.
   pages: {
     signIn: '/',
@@ -97,4 +99,6 @@ export default NextAuth({
       return session
     },
   },
-})
+}
+
+export default NextAuth(authOptions)
