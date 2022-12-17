@@ -53,35 +53,9 @@ const Layout = ({ children }: ILayoutProps) => {
 
   const openModal = () => setShowModal(true)
   const closeModal = () => setShowModal(false)
-
+  // optimization
   return (
     <>
-      <Head>
-        <title>HomeAway</title>
-        <meta
-          name='title'
-          content='Fullstack App with Next.js, NextAuth, Supabase & Prisma'
-        />
-        <link
-          rel='apple-touch-icon'
-          sizes='180x180'
-          href='/apple-touch-icon.png'
-        />
-        <link
-          rel='icon'
-          type='image/png'
-          sizes='32x32'
-          href='/favicon-32x32.png'
-        />
-        <link
-          rel='icon'
-          type='image/png'
-          sizes='16x16'
-          href='/favicon-16x16.png'
-        />
-        <link rel='manifest' href='/site.webmanifest' />
-      </Head>
-
       <div className='flex min-h-screen flex-col '>
         <header className='sticky top-0 z-10 h-16 w-full bg-white/90 shadow-sm drop-shadow-sm backdrop-blur-md'>
           <div className='container mx-auto h-full'>
