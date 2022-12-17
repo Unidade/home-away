@@ -4,7 +4,6 @@ import { HeartIcon } from '@heroicons/react/solid'
 import { IHome } from '../types/home'
 import { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
-
 import { useSession } from 'next-auth/react'
 import { useFavorites } from 'hooks/useFavorites'
 import { useModal } from 'hooks/useModal'

@@ -89,9 +89,9 @@ export default function ListedHome(home: IHome) {
         <div className='aspect-w-16 aspect-h-9 relative mt-6 overflow-hidden rounded-lg bg-gray-100 shadow-md'>
           {home?.image ? (
             <Image
-              sizes=' sizes="(min-width: 768px) 50vw,
-              (min-width: 1200px) 33vw,
-              100vw"'
+              sizes=' sizes="(min-width: 1075px) 92vw,
+              (min-width: 1200px) 80vw;
+              95vw"'
               priority
               src={home.image}
               alt={home.title}
