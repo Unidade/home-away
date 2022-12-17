@@ -3,9 +3,9 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
-
-import AuthModal from './AuthModal'
 import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import { useSession, signOut } from 'next-auth/react'
 import {
   HeartIcon,
   HomeIcon,
@@ -14,8 +14,8 @@ import {
   OfficeBuildingIcon,
   UserIcon,
 } from '@heroicons/react/outline'
-import { ChevronDownIcon } from '@heroicons/react/solid'
-import { useSession, signOut } from 'next-auth/react'
+import AuthModal from './AuthModal'
+import { useModal } from 'hooks/useModal'
 
 interface ILayoutProps {
   children?: React.ReactNode
@@ -49,11 +49,12 @@ const Layout = ({ children }: ILayoutProps) => {
   const { data: session, status } = useSession()
   const user = session?.user
   const isLoadingUser = status === 'loading'
-  const [showModal, setShowModal] = useState(false)
+  const { showModal, openModal, closeModal } = useModal()
+  // const [showModal, setShowModal] = useState(false)
 
-  const openModal = () => setShowModal(true)
-  const closeModal = () => setShowModal(false)
-  // optimization
+  // const openModal = () => setShowModal(true)
+  // const closeModal = () => setShowModal(false)
+
   return (
     <>
       <Head>
@@ -72,9 +73,7 @@ const Layout = ({ children }: ILayoutProps) => {
               <div className='flex items-center space-x-4'>
                 <button
                   type='button'
-                  onClick={() =>
-                    session?.user ? router.push('/create') : openModal()
-                  }
+                  onClick={() => (user ? router.push('/create') : openModal())}
                   className='hidden rounded-md px-3 py-1 font-medium text-gray-700 transition hover:bg-gray-100 sm:block'
                 >
                   List your home

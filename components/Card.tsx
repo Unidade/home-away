@@ -7,6 +7,7 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import { useSession } from 'next-auth/react'
 import { useFavorites } from 'hooks/useFavorites'
+import { useModal } from 'hooks/useModal'
 
 interface ICardsProps extends IHome {
   isFavorite?: boolean
@@ -25,6 +26,7 @@ const Card = ({
   const [favorite, setFavorite] = useState(false)
   const { data: session } = useSession()
   const { favorites, mutate } = useFavorites()
+  const { openModal } = useModal()
   useEffect(() => {
     if (isFavorite) {
       setFavorite(isFavorite)
@@ -72,8 +74,12 @@ const Card = ({
           aria-label='Add to favorites'
           onClick={(e) => {
             e.preventDefault()
-            setFavorite(!favorite)
-            debouncedSubmitLike(id)
+            if (!session) {
+              openModal()
+            } else {
+              setFavorite(!favorite)
+              debouncedSubmitLike(id)
+            }
           }}
           className='absolute top-2 right-2'
         >
