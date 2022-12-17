@@ -2,9 +2,11 @@
 
 ## Description
 
-This is a Airbn-like full-stack application, it was created using **NextJS**, **NextAuth**, **TailwindCSS**, **Prisma** with **Supabase**
+HomeAway is a Airbn-like application that was created with a range of powerful technologies including NextJS, NextAuth, TailwindCSS, Prisma, and Supabase. It boasts a variety of features that make it easy for users to login or signup with their Google account or using magic links. You can save your favorite houses and even list your own property on the platform. Each house has its own dedicated page that is generated at build time using dynamic routing, thanks to NextJS' getStaticPaths and getStaticProps functions.
 
-It was a lot of features like the possibility to login/signup with google account or using magic-links. You can favorite the houses
+Prisma serves as a bridge between the application and our cloud-based PostgreSQL server, while Supabase helps us host images in a static bucket and provide the database for the application. Overall, the webapp is designed to provide a seamless and intuitive experience for users.
+
+I have dedicated a significant amount of time to improving the SEO, boosting performance, and making the design responsive. As a result, I was able to achieve a score of 100 on Lighthouse for the website.
 
 ## Getting Started
 
@@ -12,30 +14,24 @@ First, install the dependencies:
 
 ```bash
 npm install
-
 ```
 
 Now you can start the development server:
 
 ```bash
 npm run dev
-
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can create a production build with:
 
 ```bash
 npm run build
-
 ```
 
 To start the production build execute:
 
 ```bash
 npm start
-
 ```
 
 ## Learn More
