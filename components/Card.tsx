@@ -69,6 +69,7 @@ const Card = ({
         </div>
         <button
           type='button'
+          aria-label='Add to favorites'
           onClick={(e) => {
             e.preventDefault()
             setFavorite(!favorite)
