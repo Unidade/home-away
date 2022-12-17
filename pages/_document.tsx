@@ -8,7 +8,6 @@ export default function Document() {
           name='description'
           content='HomeAway is a fullstack Airbn-like web application, build with NextJS, NextAuth, TailwindCSS Prisma and Supabase'
         />
-        <title>HomeAway</title>
         <meta
           name='title'
           content='Fullstack App with Next.js, NextAuth, Supabase & Prisma'
