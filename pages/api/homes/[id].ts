@@ -1,8 +1,9 @@
-import { prisma } from '../../../lib/prisma'
+import { prisma } from 'lib/prisma'
+import { supabase } from 'lib/supabase'
+import checkEnv from 'utils/getEnv'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
-import { supabase } from '../../../lib/supabase'
-import checkEnv from '../../../utils/getEnv'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { unstable_getServerSession } from 'next-auth/next'
 
 // 401 -> Authentication errors
 // 403 -> Authorization errors
@@ -18,7 +19,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const session = await getSession({ req })
+    const session = await unstable_getServerSession(req, res, authOptions)
     if (!session?.user) {
       return res.status(UNAUTHENTICATED).json({
         message: 'The request lacks valid authentication credentials ',

@@ -1,12 +1,13 @@
 import { prisma } from 'lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getSession } from 'next-auth/react'
+import { unstable_getServerSession } from 'next-auth'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const session = await getSession({ req })
+  const session = await unstable_getServerSession(req, res, authOptions)
   // Check if user is authenticated
   if (!session?.user) {
     return res.status(401).json({

@@ -1,8 +1,9 @@
 import Layout from '../components/Layout'
 import Grid from '../components/Grid'
-import { NextPageContext } from 'next'
-import { getSession } from 'next-auth/react'
 import { prisma } from '../lib/prisma'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { unstable_getServerSession } from 'next-auth/next'
+import { GetServerSideProps } from 'next'
 
 const Homes = ({ homes = [] }) => {
   return (
@@ -19,26 +20,30 @@ const Homes = ({ homes = [] }) => {
 }
 export default Homes
 
-export async function getServerSideProps(context: NextPageContext) {
-  const session = await getSession(context)
-
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  )
   if (!session) {
     return {
       redirect: { destination: '/', permanent: false },
     }
   }
-  if (session.user) {
-    try {
-      const homes = await prisma.home.findMany({
-        where: { owner: { email: session.user.email } },
-        orderBy: { createdAt: 'desc' },
-      })
+  try {
+    const homes = await prisma.home.findMany({
+      where: { owner: { email: session.user.email } },
+      orderBy: { createdAt: 'desc' },
+    })
 
-      return {
-        props: { homes: JSON.parse(JSON.stringify(homes)) },
-      }
-    } catch (error) {
-      console.error(error)
+    return {
+      props: { homes: JSON.parse(JSON.stringify(homes)) },
+    }
+  } catch (error) {
+    console.error(error)
+    return {
+      props: {},
     }
   }
 }

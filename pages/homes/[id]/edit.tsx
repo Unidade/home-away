@@ -1,16 +1,20 @@
-import { GetServerSidePropsContext } from 'next'
-import { getSession } from 'next-auth/react'
-import axios from 'axios'
-
-import Layout from '../../../components/Layout'
-import ListingForm from '../../../components/ListingForm'
-import { IHome } from '../../../types/home'
-import { prisma } from '../../../lib/prisma'
+import Layout from 'components/Layout'
+import ListingForm from 'components/ListingForm'
+import { IHome } from 'types/home'
+import { prisma } from 'lib/prisma'
+import { GetServerSideProps } from 'next'
+import { unstable_getServerSession } from 'next-auth'
+import { authOptions } from 'pages/api/auth/[...nextauth]'
 
 const Edit = (home: IHome) => {
   const updateHome = async (data: Partial<IHome>) => {
-    console.log('data:', data, 'home:', home)
-    await axios.patch(`/api/homes/${home?.id}`, data)
+    await fetch(`/api/homes/${home?.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
   }
 
   return (
@@ -34,14 +38,18 @@ const Edit = (home: IHome) => {
 }
 
 // Check if current logged user owns the home, if so, authorize editing, otherwise, redirect to home page
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const redirect = {
     redirect: {
       destination: '/',
       permanent: false,
     },
   }
-  const session = await getSession(context)
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  )
 
   if (!session || !session.user || !session.user.email) {
     return redirect
