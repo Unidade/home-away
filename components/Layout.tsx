@@ -56,6 +56,9 @@ const Layout = ({ children }: ILayoutProps) => {
   // optimization
   return (
     <>
+      <Head>
+        <title>HomeAway</title>
+      </Head>
       <div className='flex min-h-screen flex-col '>
         <header className='sticky top-0 z-10 h-16 w-full bg-white/90 shadow-sm drop-shadow-sm backdrop-blur-md'>
           <div className='container mx-auto h-full'>
