@@ -1,6 +1,7 @@
 {
-  "name": "HomeAway",
+  "name": "HomeAway App",
   "short_name": "HomeAway",
+  "start_url": "https://homeaway-unidade.vercel.app/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
