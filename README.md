@@ -8,6 +8,8 @@ Prisma serves as a bridge between the application and our cloud-based PostgreSQL
 
 I have dedicated a significant amount of time to improving the SEO, boosting performance, and making the design responsive. As a result, I was able to achieve a score of 100 on Lighthouse for the website.
 
+![]()
+
 ## Getting Started
 
 First, install the dependencies:
@@ -34,17 +36,14 @@ To start the production build execute:
 npm start
 ```
 
-## Learn More
+## Key Features
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Skeleton UI while the page is loading
+- User authorization and authentication is handled by NextAuth, which allows users to sign in with their Google account or via magic links sent to their email address.
+- Dynamic routing is implemented for each base, with the ability to pre-render routes at build time or regenerate them at runtime for new listings.
+- Logged-in users can list their house and add it to the Supabase database via the '/create' path. The site will then update with the new data.
+- Users can favorite houses and view their favorites on the '/favorites' path. They can also view all of their own listed houses on the '/homes' path.
+- All users can view the index page and the individual page for each house.
+- To protect user data, pages are restricted so that users can only view their own favorites houses and listed houses.
+- When creating a new listing, users can upload an image, which will be stored in a Supabase bucket and referenced in the PostgreSQL database.
+- TypeScript and Prisma are used to ensure type safety during development, helping to prevent errors and improve the overall quality of the application.
