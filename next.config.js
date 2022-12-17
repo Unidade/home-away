@@ -8,6 +8,7 @@ const nextConfig = {
       'izkohedcagagpmxongyf.supabase.in',
       'lh3.googleusercontent.com',
     ],
+    minimumCacheTTL: 60 * 60 * 24,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
