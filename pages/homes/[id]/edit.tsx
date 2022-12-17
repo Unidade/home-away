@@ -65,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (!home) {
     return redirect
   }
-
+  context.res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
   return {
     props: JSON.parse(JSON.stringify(home)),
   }
