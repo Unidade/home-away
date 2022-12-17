@@ -146,7 +146,13 @@ const Layout = ({ children }: ILayoutProps) => {
                                   ) : (
                                     <button
                                       className='flex w-full items-center space-x-2 rounded-md py-2 px-4 hover:bg-gray-100'
-                                      onClick={() => signOut()}
+                                      onClick={async () => {
+                                        const data = await signOut({
+                                          redirect: false,
+                                          callbackUrl: '/',
+                                        })
+                                        router.push(data.url)
+                                      }}
                                     >
                                       <Icon className='h-5 w-5 shrink-0 text-gray-500' />
                                       <span>{label}</span>

@@ -5,8 +5,7 @@ import { useFavorites } from 'hooks/useFavorites'
 
 const Favorites = () => {
   const { favorites: homes, isLoading, isValidating } = useFavorites()
-  console.log(isLoading)
-  console.log(isValidating)
+
   if (isLoading || isValidating)
     return (
       <Layout>
@@ -16,7 +15,7 @@ const Favorites = () => {
         <LoadingSpinner />
       </Layout>
     )
-  console.log(homes)
+
   if (homes) {
     return (
       <Layout>
