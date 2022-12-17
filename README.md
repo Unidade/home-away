@@ -42,6 +42,7 @@ npm start
 
 ## Key Features
 
+- The initial images and descriptions were gathered from the Unsplash API and added to the database.
 - Skeleton UI while the page is loading
 - User authorization and authentication is handled by NextAuth, which allows users to sign in with their Google account or via magic links sent to their email address.
 - Dynamic routing is implemented for each base, with the ability to pre-render routes at build time or regenerate them at runtime for new listings.
