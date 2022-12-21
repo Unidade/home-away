@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -50,10 +50,6 @@ const Layout = ({ children }: ILayoutProps) => {
   const user = session?.user
   const isLoadingUser = status === 'loading'
   const { showModal, openModal, closeModal } = useModal()
-  // const [showModal, setShowModal] = useState(false)
-
-  // const openModal = () => setShowModal(true)
-  // const closeModal = () => setShowModal(false)
 
   return (
     <>
