@@ -1,4 +1,4 @@
-import React, { useState, useRef, RefObject } from 'react'
+import React, { useState, useRef } from 'react'
 import Image from 'next/image'
 import toast from 'react-hot-toast'
 import classNames from 'classnames'
