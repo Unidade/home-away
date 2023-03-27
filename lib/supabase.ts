@@ -1,8 +1,8 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
-import checkEnv from '../utils/getEnv'
+import getEnv from '../utils/getEnv'
 
-const SUPABASE_URL = checkEnv(process.env.SUPABASE_URL)
-const SUPABASE_KEY = checkEnv(process.env.SUPABASE_KEY)
+const SUPABASE_URL = getEnv(process.env.SUPABASE_URL)
+const SUPABASE_KEY = getEnv(process.env.SUPABASE_KEY)
 
 const globalForSupabase = global as unknown as {
   supabase: SupabaseClient<any, 'public', any>
