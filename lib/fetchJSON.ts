@@ -12,7 +12,8 @@ export async function fetchJSON(...args: Parameters<typeof fetch>) {
     if (error instanceof Error) {
       throw error
     } else {
-      throw new Error('Unknown error', error)
+      console.error(error)
+      throw new Error('Unknown error')
     }
   }
 }
