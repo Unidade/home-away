@@ -20,17 +20,17 @@ const { Provider } = modalContext
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const [showModal, setShowModal] = useState(false)
 
-  const openModalWithinUseCallback = useCallback(() => setShowModal(true), [])
-  const closeModalWithinUseCallback = useCallback(() => setShowModal(false), [])
+  const openModal = useCallback(() => setShowModal(true), [])
+  const closeModal = useCallback(() => setShowModal(false), [])
 
   const value = useMemo(
     () => ({
-      openModal: openModalWithinUseCallback,
-      closeModal: closeModalWithinUseCallback,
+      openModal,
+      closeModal,
       showModal,
       setShowModal
     }),
-    [closeModalWithinUseCallback, openModalWithinUseCallback, showModal]
+    [openModal, closeModal, showModal, setShowModal]
   )
 
   return <Provider value={value}>{children}</Provider>
