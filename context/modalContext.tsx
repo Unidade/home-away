@@ -1,18 +1,45 @@
-import React, { createContext, useState } from 'react'
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState
+} from 'react'
 
-export const modalContext = createContext<any>(null)
+export const modalContext = createContext<ModalContextType | null>(null)
+
+type ModalContextType = {
+  openModal: () => void
+  closeModal: () => void
+  showModal: boolean
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const { Provider } = modalContext
 
 export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const [showModal, setShowModal] = useState(false)
 
-  const openModal = () => setShowModal(true)
-  const closeModal = () => setShowModal(false)
+  const openModalWithinUseCallback = useCallback(() => setShowModal(true), [])
+  const closeModalWithinUseCallback = useCallback(() => setShowModal(false), [])
 
-  return (
-    <Provider value={{ openModal, showModal, setShowModal, closeModal }}>
-      {children}
-    </Provider>
+  const value = useMemo(
+    () => ({
+      openModal: openModalWithinUseCallback,
+      closeModal: closeModalWithinUseCallback,
+      showModal,
+      setShowModal
+    }),
+    [closeModalWithinUseCallback, openModalWithinUseCallback, showModal]
   )
+
+  return <Provider value={value}>{children}</Provider>
+}
+
+export const useModal = () => {
+  const modalStates = useContext(modalContext)
+  if (!modalStates) {
+    throw new Error('useModal must be used within a ModalProvider')
+  }
+  return { ...modalStates }
 }
