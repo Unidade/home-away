@@ -21,9 +21,7 @@ export async function fetchJSON(
 
     if (error instanceof Error) {
       throw error
-    } else {
-      console.error(error)
-      throw new Error('Unknown error')
     }
+    throw new Error('Unknown error')
   }
 }
