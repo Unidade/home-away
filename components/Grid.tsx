@@ -1,9 +1,10 @@
 import Card from '../components/Card'
 import { ExclamationIcon } from '@heroicons/react/outline'
-import { IHome } from '../types/home'
+import { Home } from '@prisma/client'
+
 import { useFavorites } from 'hooks/useFavorites'
 interface IGridProps {
-  homes: IHome[]
+  homes: Home[]
 }
 
 const Grid = ({ homes = [] }: IGridProps) => {
@@ -17,14 +18,14 @@ const Grid = ({ homes = [] }: IGridProps) => {
     </p>
   ) : (
     <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-      {homes.map((home: IHome) => (
+      {homes.map((home) => (
         <Card
           key={home.id}
           {...home}
           isFavorite={
             favorites &&
             favorites?.length !== 0 &&
-            favorites.filter((fav: IHome) => fav.id === home.id).length !== 0
+            favorites.filter((fav) => fav.id === home.id).length !== 0
           }
         />
       ))}

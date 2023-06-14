@@ -1,19 +1,19 @@
+import { Home } from '@prisma/client'
 import Layout from 'components/Layout'
 import ListingForm from 'components/ListingForm'
-import { IHome } from 'types/home'
 import { prisma } from 'lib/prisma'
 import { GetServerSideProps } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 
-const Edit = (home: IHome) => {
-  const updateHome = async (data: Partial<IHome>) => {
+const Edit = (home: Home) => {
+  const updateHome = async (data: Partial<Home>) => {
     await fetch(`/api/homes/${home?.id}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     })
   }
 
@@ -42,8 +42,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const redirect = {
     redirect: {
       destination: '/',
-      permanent: false,
-    },
+      permanent: false
+    }
   }
   const session = await unstable_getServerSession(
     context.req,
@@ -57,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const user = await prisma.user.findUnique({
     where: { email: session.user.email as string },
-    select: { listedHomes: true },
+    select: { listedHomes: true }
   })
 
   const id = context?.params?.id
@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   context.res.setHeader('Cache-Control', 'public, max-age=31536000, immutable')
   return {
-    props: JSON.parse(JSON.stringify(home)),
+    props: JSON.parse(JSON.stringify(home))
   }
 }
 

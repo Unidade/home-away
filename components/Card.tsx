@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { HeartIcon } from '@heroicons/react/solid'
-import { IHome } from '../types/home'
 import { useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { useSession } from 'next-auth/react'
 import { useFavorites } from 'hooks/useFavorites'
-import { useModal } from 'hooks/useModal'
+import { Home } from '@prisma/client'
+import { useModal } from 'context/modalContext'
 
-interface ICardsProps extends IHome {
+interface ICardsProps extends Home {
   isFavorite?: boolean
 }
 
@@ -20,7 +20,7 @@ const Card = ({
   beds = 0,
   baths = 0,
   price = 0,
-  isFavorite = false,
+  isFavorite = false
 }: ICardsProps) => {
   const [favorite, setFavorite] = useState(false)
   const { data: session } = useSession()
@@ -45,7 +45,7 @@ const Card = ({
       } else {
         removeFromFavorites(homeID)
         mutate(
-          favorites.filter((home: IHome) => home.id !== homeID),
+          favorites.filter((home) => home.id !== homeID),
           { revalidate: false }
         )
       }
@@ -109,7 +109,7 @@ const Card = ({
       <p className='mt-2'>
         {new Intl.NumberFormat('en-US', {
           style: 'currency',
-          currency: 'USD',
+          currency: 'USD'
         }).format(price ?? 0)}{' '}
         <span className='text-gray-500'>/night</span>
       </p>

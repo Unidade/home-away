@@ -1,7 +1,7 @@
 import swr, { KeyedMutator } from 'swr'
 import { fetchJSON } from 'lib/fetchJSON'
 import { useSession } from 'next-auth/react'
-import { IHome } from 'types/home'
+import { Home } from '@prisma/client'
 
 export function useFavorites(): useFavoritesReturn {
   const { data: session } = useSession()
@@ -16,12 +16,12 @@ export function useFavorites(): useFavoritesReturn {
     isLoading,
     error,
     mutate,
-    isValidating,
+    isValidating
   }
 }
 
 interface useFavoritesReturn {
-  favorites: IHome[]
+  favorites: Home[]
   isLoading: boolean
   error: Error
   mutate: KeyedMutator<any>

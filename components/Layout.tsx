@@ -15,7 +15,7 @@ import {
   UserIcon,
 } from '@heroicons/react/outline'
 import AuthModal from './AuthModal'
-import { useModal } from 'hooks/useModal'
+import { useModal } from 'context/modalContext'
 
 interface ILayoutProps {
   children?: React.ReactNode

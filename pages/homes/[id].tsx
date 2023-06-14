@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import Layout from '../../components/Layout'
 import { useRouter } from 'next/router'
-import { IHome } from '../../types/home'
 import { prisma } from '../../lib/prisma'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { PencilIcon } from '@heroicons/react/solid'
+import { Home } from '@prisma/client'
 
-export default function ListedHome(home: IHome) {
+export default function ListedHome(home: Home) {
   const router = useRouter()
   const { data: session } = useSession()
   const [isOwner, setIsOwner] = useState(false)
@@ -111,32 +111,32 @@ export default function ListedHome(home: IHome) {
 
 export async function getStaticPaths() {
   const homes = await prisma.home.findMany({
-    select: { id: true },
+    select: { id: true }
   })
 
   return {
     paths: homes.map((home) => ({
-      params: { id: home.id },
+      params: { id: home.id }
     })),
-    fallback: true,
+    fallback: true
   }
 }
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
   const home = await prisma.home.findUnique({
-    where: { id: params.id },
+    where: { id: params.id }
   })
 
   if (home) {
     return {
-      props: JSON.parse(JSON.stringify(home)),
+      props: JSON.parse(JSON.stringify(home))
     }
   }
 
   return {
     redirect: {
       destination: '/',
-      permanent: false,
-    },
+      permanent: false
+    }
   }
 }

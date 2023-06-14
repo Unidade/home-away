@@ -7,8 +7,8 @@ import { Formik, Form } from 'formik'
 import Input from './Input'
 import ImageUpload from './ImageUpload'
 
-import { IHome } from '../types/home'
 import { fetchJSON } from '../lib/fetchJSON'
+import { Home } from '@prisma/client'
 
 const ListingSchema = Yup.object().shape({
   title: Yup.string().trim().required(),
@@ -16,14 +16,14 @@ const ListingSchema = Yup.object().shape({
   price: Yup.number().positive().integer().min(1).required(),
   guests: Yup.number().positive().integer().min(1).required(),
   beds: Yup.number().positive().integer().min(1).required(),
-  baths: Yup.number().positive().integer().min(1).required(),
+  baths: Yup.number().positive().integer().min(1).required()
 })
 
 const ListingForm = ({
   initialValues,
   redirectPath = '',
   buttonText = 'Submit',
-  onSubmit = () => new Promise((resolve) => resolve()),
+  onSubmit = () => new Promise((resolve) => resolve())
 }: IListingForm) => {
   const router = useRouter()
 
@@ -41,10 +41,10 @@ const ListingForm = ({
       const { url: imageURL } = await fetchJSON('/api/image-upload', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
 
-        body: JSON.stringify({ image }),
+        body: JSON.stringify({ image })
       })
       console.log(imageURL)
       setImageUrl(imageURL)
@@ -58,7 +58,7 @@ const ListingForm = ({
   }
 
   const handleOnSubmit = async (
-    values: Omit<IHome, 'image' | 'id' | 'createdAt' | 'updatedAt' | 'ownerId'>
+    values: Omit<Home, 'image' | 'id' | 'createdAt' | 'updatedAt' | 'ownerId'>
   ) => {
     console.log(values)
     let toastId
@@ -88,7 +88,7 @@ const ListingForm = ({
     guests: 1,
     beds: 1,
     baths: 1,
-    ownerId: '',
+    ownerId: ''
   }
 
   return (
@@ -181,7 +181,7 @@ const ListingForm = ({
 
 interface IListingForm {
   initialValues?: Pick<
-    IHome,
+    Home,
     'baths' | 'beds' | 'title' | 'description' | 'price' | 'guests' | 'image'
   >
   redirectPath: string

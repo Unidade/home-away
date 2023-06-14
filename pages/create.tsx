@@ -3,11 +3,10 @@ import ListingForm from '../components/ListingForm'
 import { authOptions } from 'pages/api/auth/[...nextauth]'
 import { unstable_getServerSession } from 'next-auth/next'
 import { GetServerSideProps } from 'next'
-
-import { IHome } from '../types/home'
+import { Home } from '@prisma/client'
 
 export default function Create() {
-  const addHome = async (data: IHome) => {
+  const addHome = async (data: Home) => {
     await fetch('/api/homes', {
       method: 'POST',
       headers: {
