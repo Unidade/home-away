@@ -92,8 +92,6 @@ const AuthModal = ({
         callbackUrl: window.location.href,
       })
       if (signInResponse && signInResponse.error) {
-        // The signInResponse object has an 'error' property
-
         throw new Error(signInResponse.error)
       }
       setConfirm(true)
@@ -120,11 +118,9 @@ const AuthModal = ({
       onClose()
     }
   }
-
   // Reset modal
   useEffect(() => {
     if (!show) {
-      // Wait for 200ms for animation to finish
       setTimeout(() => {
         setDisabled(false)
         setConfirm(false)
