@@ -10,10 +10,7 @@ export async function getStaticProps() {
     props: {
       homes: JSON.parse(JSON.stringify(homes)),
     },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every 5 seconds
-    revalidate: 5, // In seconds
+    revalidate: 5,
   }
 }
 
