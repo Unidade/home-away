@@ -1,5 +1,11 @@
-// Wrapper around fetch that returns the JSON response
-export async function fetchJSON(...args: Parameters<typeof fetch>) {
+/**
+ * @summary Wrapper around fetch that returns the JSON response
+ * @param {...Parameters<typeof fetch>} args
+ * @returns {Promise<any>}
+ */
+export async function fetchJSON(
+  ...args: Parameters<typeof fetch>
+): Promise<any> {
   try {
     const resp = await fetch(...args)
     if (!resp.ok) {
