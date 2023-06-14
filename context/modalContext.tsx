@@ -8,16 +8,7 @@ import React, {
 
 export const modalContext = createContext<ModalContextType | null>(null)
 
-type ModalContextType = {
-  openModal: () => void
-  closeModal: () => void
-  showModal: boolean
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const { Provider } = modalContext
-
-export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
+function useModalContextValue() {
   const [showModal, setShowModal] = useState(false)
 
   const openModal = useCallback(() => setShowModal(true), [])
@@ -33,7 +24,17 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
     [openModal, closeModal, showModal, setShowModal]
   )
 
-  return <Provider value={value}>{children}</Provider>
+  return value
+}
+
+type ModalContextType = ReturnType<typeof useModalContextValue>
+
+export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <modalContext.Provider value={useModalContextValue()}>
+      {children}
+    </modalContext.Provider>
+  )
 }
 
 export const useModal = () => {
